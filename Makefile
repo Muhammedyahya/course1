@@ -8,9 +8,9 @@
 # misuse of this material. 
 # 
 # Modified by Ashraf Abubaker for Coursera Course in Embedded software design
-# Oct 2018
+# NOV 2018
 # You can obtain this file from the Git Repository
-# https://github.com/ashrafmalraheem/make_repository
+# https://github.com/ashrafmalraheem/course1
 #*****************************************************************************
 
 #------------------------------------------------------------------------------
@@ -56,17 +56,15 @@ ASFLAGS  = -S
 # PLATFORM = HOST # Remove the comment to make the default platform is host!
 # Platform Overrides
 ifeq ($(PLATFORM),HOST)
-		CC = gcc
-		AS = x86_64-linux-gnu-objdump
-		SIZEUTIL = x86_64-linux-gnu-size
+	CC = gcc
+	AS = x86_64-linux-gnu-objdump
+	SIZEUTIL = x86_64-linux-gnu-size
 else ifeq ($(PLATFORM),MSP432)
-		SOURCES  +=$(SRC_MSP)
-		INCLUDES +=$(MSP_INCLUDES)
- 		CC = arm-none-eabi-gcc
-		LDFLAGS +=-Xlinker $(LINKER_FILE)
-		CFLAGS +=-mcpu=$(CPU) -march=$(ARCH) -mfloat-abi=hard -mfpu=fpv4-sp-d16 --specs=$(SPECS) -mthumb
-		AS = arm-none-eabi-objdump
-		SIZEUTIL = arm-none-eabi-size
+	CC = arm-none-eabi-gcc
+	LDFLAGS +=-Xlinker $(LINKER_FILE)
+	CFLAGS +=-mcpu=$(CPU) -march=$(ARCH) -mfloat-abi=hard -mfpu=fpv4-sp-d16 --specs=$(SPECS) -mthumb
+	AS = arm-none-eabi-objdump
+	SIZEUTIL = arm-none-eabi-size
 endif
 
 OBJS  := $(SOURCES:.c=.o)
@@ -95,6 +93,6 @@ $(TARGET).out: $(OBJS) $(DEP)
 
 .PHONY: clean
 clean: 
-	rm -f $(OBJS) $(PRES) $(ASMP)  $(ASMBDUMP) $(TARGET).out $(TARGET).map  $(DEP) $(TARGET).asm ./-MD
+	rm -f *.dep *.d *.i *.o *.asm *.out
 	ls -la
 

@@ -6,21 +6,25 @@
 # permitted to modify this and use it to learn about the field of embedded
 # software. Alex Fosdick and the University of Colorado are not liable for any
 # misuse of this material. 
-#
+# Modified by Ashraf Abubaker for Coursera Course in Embedded software design
+# NOV 2018
+# You can obtain this file from the Git Repository
+# https://github.com/ashrafmalraheem/course1
+#*****************************************************************************
+
 #*****************************************************************************
 
 # Add your Source files to this variable
-
 SOURCES = main.c\
 	  memory.c
-#Addtional sources for MSP432 Platform
-SRC_MSP = interrupts_msp432p401r_gcc.c\
- 	  startup_msp432p401r_gcc.c   \
- 	  system_msp432p401r.c
 
 # Add your include paths to this variable
 INCLUDES =    -I../include/common
-#Additional include paths for MSP432 Platform
-MSP_INCLUDES = -I../include/CMSIS\
- 	       -I../include/msp432
 
+#Additional sources and include paths for MSP432 Platform
+ifeq ($(PLATFORM),MSP432)
+  SOURCES += interrupts_msp432p401r_gcc.c\
+ 	     startup_msp432p401r_gcc.c   \
+ 	     system_msp432p401r.c	
+  INCLUDES += -I../include/CMSIS\
+ 	      -I../include/msp432
