@@ -53,6 +53,18 @@ void swap(unsigned char* variable1,unsigned char* variable2){
 		*variable1 = temp;
 	}
 }
+// Function Override to Take integer variables
+void swap(uint8_t* variable1,uint8_t* variable2){
+	if((variable1==NULL)||(variable2==NULL)){
+		PRINTF("\n Error:Pointers are not valid!");
+	}
+	else{
+		uint8_t temp=0;
+		temp = *variable2;
+		*variable2 = *variable1;
+		*variable1 = temp;
+	}
+}
 long int find_minimum(unsigned char* array, signed long int temp_length){
 	if(check_validity(array,temp_length)){
 		unsigned int length = (unsigned int) temp_length;

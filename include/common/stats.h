@@ -116,6 +116,15 @@ void sort_array(unsigned char* array,signed long int length);
  * @return <It don't return any thing>
  * */
 void swap(unsigned char* variable1,unsigned char* variable2);
+/*swap Override*/
+
+/* @breif <it took two variables and swap its location in an array if they are not NULL>
+ * @param <pointer to the first variable>
+ * @param <pointer to the seconde variable>
+ * @return <It don't return any thing>
+ * */
+void swap(uint8_t* variable1,uint8_t* variable2);
+
 /* check_validity */
 /* @brief < it takes the array pointer and length to check the validity of the two variables. If valid it returns 1 if not it returns 0>
 * @param <pointer to array>
