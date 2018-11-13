@@ -24,8 +24,6 @@
  */
 
 
-
-#include <stdio.h>
 #include "stats.h"
 
 /* Size of the Data Set */
@@ -46,7 +44,7 @@ char find_mean(unsigned char* array,signed long int temp_length){
 }
 void swap(unsigned char* variable1,unsigned char* variable2){
 	if((variable1==NULL)||(variable2==NULL)){
-		printf("\n Error:Pointers are not valid!");
+		PRINTF("\n Error:Pointers are not valid!");
 	}
 	else{
 		char temp=0;
@@ -101,14 +99,14 @@ void print_array(unsigned char* array, signed long int temp_length){
 	#ifdef VERBOSE  // Print Only if Debugging is enabled!
 		if(check_validity(array,temp_length)){
 			unsigned int length=(unsigned int)temp_length;
-			printf("\n");
+			PRINTF("\n");
 			for(unsigned int i=0;i<length;i++){
 				if((i%4)==0){
-					printf("\n");
+					PRINTF("\n");
 				}
-				printf("	%d",array[i]);
+				PRINTF("	%d",array[i]);
 			}
-			printf("\n");
+			PRINTF("\n");
 		}
 	#endif
 }
@@ -117,7 +115,7 @@ char find_median(unsigned char* array,signed long int temp_length){
 		unsigned int length=(unsigned int)temp_length;
 		sort_array(array,length);
 		if((length%2)==0){
-			printf("\n There is two medians %d , %d",array[length/2-1],array[length/2]);
+			PRINTF("\n There is two medians %d , %d",array[length/2-1],array[length/2]);
 		return (array[length/2-1]+array[length/2])/2;
 		}
 		return array[(length+1)/2]; //bug here!!
@@ -127,23 +125,23 @@ return 0;
 void print_statistics(unsigned char* array,signed long int temp_length){
 	if(check_validity(array,temp_length)){
 		unsigned int length=(unsigned int)temp_length;
-		printf("\n******************* The Statistics *************** \n The mean is : %d",find_mean(array,length));
-		printf("\n The max is : %ld",find_maximum(array,length));
-		printf("\n The Mini is: %ld",find_minimum(array,length));
-		printf("\n The median is: %d\n",find_median(array,length));
+		PRINTF("\n******************* The Statistics *************** \n The mean is : %d",find_mean(array,length));
+		PRINTF("\n The max is : %ld",find_maximum(array,length));
+		PRINTF("\n The Mini is: %ld",find_minimum(array,length));
+		PRINTF("\n The median is: %d\n",find_median(array,length));
 	}
 }	
 int check_validity(unsigned char* array , signed long int length){
 	if(array == NULL){
-		printf("\n The pointer is not pointing to anything");
+		PRINTF("\n The pointer is not pointing to anything");
 		return 0; // The pointer is not pointing to anything 
 	}
 	if(length <1){
-		printf("\n Length is negative, ERROR");
+		PRINTF("\n Length is negative, ERROR");
 		return 0; 
 	}
 	if(length > SIZE){
-		printf("\n Length is very large, ERROR");
+		PRINTF("\n Length is very large, ERROR");
 		return 0; 
 	}
 	return 1;
