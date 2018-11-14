@@ -61,12 +61,12 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length){
 	size_t i=1;
 	uint8_t * temp_dst = dst; // To return dst address 
 	if((src - dst)<length){ 
-		for(i=1;i <= length;i++){
+		for(i=1;i < length;i++){
 			// Poiting to the Bottom, 
 			dst++; // This guarantee the increment will be based on size of pointer 
 			src++;
 		}
-		for(i=1;i <= length;i++){
+		for(i=1;i < length;i++){
 			*(dst) = *(src);
 			dst--;
 			src--;
@@ -75,7 +75,7 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length){
 	/*
 	 * No Overlap Start from the Top
 	*/	
-		for(i=1;i <= length;i++){
+		for(i=1;i < length;i++){
 			*(dst) = *(src);
 			dst++;
 			src++;
@@ -91,7 +91,7 @@ uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length){
 	}
 	size_t i=1;
 	uint8_t * temp_dst = dst; // To return dst address 
-	for(i=1;i <= length;i++){
+	for(i=1;i < length;i++){
 		*(dst) = *(src);
 		dst++;
 		src++;
@@ -106,7 +106,7 @@ uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value){
 	}
 	size_t i=1;
 	uint8_t * temp_src = src; // To return src address 
-	for(i=1;i <= length;i++){
+	for(i=1;i < length;i++){
 		*(src) = value;
 		src++;
 	}
@@ -127,11 +127,11 @@ uint8_t * my_reverse(uint8_t * src, size_t length){
 	size_t i=1;
 	uint8_t * temp_src = src;
 	uint8_t * temp2_src = src; // To return src address 
-	for(i=1;i <= length;i++){
+	for(i=1;i < length;i++){
 		// Poiting to the Bottom, 
 		temp_src++; // This guarantee the increment will be based on size of pointer 
 	}
-	for(i=1;i <= (length/2);i++){
+	for(i=1;i < (length/2);i++){
 		swap(src, temp_src);
 		src++;
 		temp_src--;
