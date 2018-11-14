@@ -48,3 +48,93 @@ void clear_all(char * ptr, unsigned int size){
   set_all(ptr, 0, size);
 }
 
+
+uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length){
+	/*   Check Validity of Data */
+	if(src==NULL)||(dst==NULL)||(length<=0){
+		return NULL; // Parameters are invalid
+	}
+	/*
+	 * Check if there is overlapping Then start the move from
+	 * The bottom
+	*/
+	size_t i=1;
+	uint8_t * temp_dst = dst; // To return dst address 
+	if((src - dst)<length){ 
+		for(i=1;i <= length;i++){
+			// Poiting to the Bottom, 
+			dst++; // This guarantee the increment will be based on size of pointer 
+			src++;
+		}
+		for(i=1;i <= length;i++){
+			*(dst) = *(src);
+			dst--;
+			src--;
+		}
+	}else{
+	/*
+	 * No Overlap Start from the Top
+	*/	
+		for(i=1;i <= length;i++){
+			*(dst) = *(src);
+			dst++;
+			src++;
+		}
+	}
+	return temp_dst;
+}
+
+uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length){
+	/*   Check Validity of Data */
+	if(src==NULL)||(dst==NULL)||(length<=0){
+		return NULL; // Parameters are invalid
+	}
+	size_t i=1;
+	uint8_t * temp_dst = dst; // To return dst address 
+	for(i=1;i <= length;i++){
+		*(dst) = *(src);
+		dst++;
+		src++;
+	}
+	return temp_dst;
+}
+
+uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value){
+	/*   Check Validity of Data */
+	if(src==NULL)||(length<=0){
+		return NULL; // Parameters are invalid
+	}
+	size_t i=1;
+	uint8_t * temp_src = src; // To return src address 
+	for(i=1;i <= length;i++){
+		*(src) = value;
+		src++;
+	}
+	return temp_src;
+	
+}
+
+uint8_t * my_memzero(uint8_t * src, size_t length){
+	
+	return my_memset(src,length,0);
+}
+
+uint8_t * my_reverse(uint8_t * src, size_t length){
+	/*   Check Validity of Data */
+	if(src==NULL)||(length<=0){
+		return NULL; // Parameters are invalid
+	}
+	size_t i=1;
+	uint8_t * temp_src = src;
+	uint8_t * temp2_src = src; // To return src address 
+	for(i=1;i <= length;i++){
+		// Poiting to the Bottom, 
+		temp_src++; // This guarantee the increment will be based on size of pointer 
+	}
+	for(i=1;i <= (length/2);i++){
+		swap(src, temp_src);
+		src++;
+		temp_src--;
+	}
+	return temp2_src;
+}

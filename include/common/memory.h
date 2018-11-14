@@ -90,4 +90,77 @@ void set_all(char * ptr, char value, unsigned int size);
  */
 void clear_all(char * ptr, unsigned int size);
 
+
+/**
+ * @brief Move Data From Source location to Destination
+ *
+ * Given a pointer to an int data set, this will move a number
+ * of elements to another destination given the length provided and it returns pointer * to the destination. 
+ * The function gurantee the overlap between source and destination don't result in  
+ * data corruption.
+ *
+ * @param src Pointer to source
+ * @param dst Pointer to destination
+ * @param length The length of data need to be moved.
+ *
+ * @return pointer to destination.
+ */
+uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length);
+
+/**
+ * @brief Copy Data From Source location to Destination
+ *
+ * Given a pointer to an int data set, this will copy a number
+ * of elements to another destination given the length provided and it returns pointer * to the destination. 
+ *
+ * @param src Pointer to source
+ * @param dst Pointer to destination
+ * @param length The length of data need to be moved.
+ *
+ * @return pointer to destination.
+ */
+uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length);
+
+/**
+ * @brief Set in memory indicated by Source and Length to a given value
+ *
+ * Given a pointer to an int data set, this will set number
+ * of elements to specific value; given the length provided and it returns pointer * to  
+ * the source. 
+ *
+ * @param src Pointer to source
+ * @param length The length of data need to be moved.
+ * @param value should be written in memory locations
+ *
+ * @return pointer to source.
+ */
+uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value);
+/**
+ * @brief Clear memory indicated by Source and Length to Zero
+ *
+ * Given a pointer to an int data set, this will clear number
+ * of elements to Zero; given the length provided and it returns pointer * to  
+ * the source. 
+ *
+ * @param src Pointer to source
+ * @param length The length of data need to be moved.
+ *
+ * @return pointer to source.
+ */
+uint8_t * my_memzero(uint8_t * src, size_t length);
+/**
+ * @brief Take a pointer to Data and length and reverse the order of Data in memory.
+ *
+ * Given a pointer to an int data set, this will the order 
+ * of elements ; given the length provided and it returns pointer * to  
+ * the source. 
+ *
+ * @param src Pointer to source
+ * @param length The length of data need to be moved.
+ *
+ * @return pointer to source.
+ */
+uint8_t * my_reverse(uint8_t * src, size_t length);
+
+
 #endif /* __MEMORY_H__ */
