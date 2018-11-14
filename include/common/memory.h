@@ -162,5 +162,26 @@ uint8_t * my_memzero(uint8_t * src, size_t length);
  */
 uint8_t * my_reverse(uint8_t * src, size_t length);
 
+/**
+ * @brief Reserve a number of memory location (32bit word) and return pointer.
+ *
+ * This function take a length and reserve memory location with that length. 
+ * It returns the pointer to that memory location and if it fails it will return NULL   
+ *
+ * @param length The length of location to be reserved.
+ *
+ * @return pointer to memory location.
+ */
+int32_t * reserve_words(size_t length);
 
+/**
+ * @brief Free memory location.
+ *
+ * This function take a pointer to a memory location and make it free for new 
+ * allocation   
+ *
+ * @param src The pointer to memory location.
+ *
+ */
+void free_words(int32_t * src);
 #endif /* __MEMORY_H__ */
