@@ -37,8 +37,8 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base){
 	while(length<=32) // Dismantle the number into individual digits by dividing by 10;
 	{                 // The most significant digit will be at the last location.
 		
-		*ptr = data%10;  // Store the modulus
-		data = data/10;  // Shift the data to the right
+		*ptr = data%base;  // Store the modulus
+		data = data/base;  // Shift the data to the right
 		*ptr = *ptr + 48; // Convert to the decimal ASCII equivelant.
 		ptr++;            // point to the next location
 		length++;    
