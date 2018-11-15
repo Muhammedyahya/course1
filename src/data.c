@@ -28,6 +28,7 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base){
 	uint8_t *Start_Address = ptr;
 	uint8_t length=1;
 	uint8_t temp_length;
+	uint8_t ASCII_start;
 	if(data<0){ // If the data is negative the MSD is the negative sign
 		*ptr = 45; // Decimal equivelant of "-" sign
 		ptr++;
@@ -39,10 +40,16 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base){
 		
 		*ptr = data%base;  // Store the modulus
 		data = data/base;  // Shift the data to the right
-		*ptr = *ptr + 48; // Convert to the decimal ASCII equivelant.
+		if(*ptr>9){
+			ASCII_start = 65; // if the number is 10 and above it should be A, B, ...
+		}else{
+			ASCII_start = 48;
+		}
+		
+		*ptr = *ptr + ASCII_start; // Convert to the ASCII equivelant.
 		ptr++;            // point to the next location
 		length++;    
-		if((data==0)){ // The number division is completed
+		if((data==0)){    // The number division is completed
 			*ptr=NULL; // Terminate by NULL
 			break; 
 		}
@@ -56,9 +63,7 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base){
 		temp_length = temp_length -1;
 	}
 	ptr = my_reverse(ptr, temp_length); // Reverse the order so That the first location 
-										// Points to the most significant digit (MSD)
-	
-	
+					    // Points to the most significant digit (MSD)
 	
 	return length;
 }
