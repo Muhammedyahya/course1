@@ -32,11 +32,11 @@
  * Algorithm: 
  * 1- Check if the number is negative: 
  * 		-if it is negative the first byte is negative sign.
- * 2- Convert the integer into signle decimal digits and store them in memory 
- * 		Most significant digit should be stored first.
- * 3- Change the data into ASCII with base 10. 
- * 4- If the base is not 10 convert to the correct.
- * 5- Return the length.
+ * 2- Convert the integer into signle decimal digits and store them in memory in Decimall
+ * ASCII equivelant
+ * 		Most significant digit should be stored first. 
+ * 3- If the base is not 10 convert to the correct.
+ * 4- Return the length.
  * 
  * @param data integer data for conversion
  * @param ptr Pointer to memory location where result of conversion is saved
