@@ -32,17 +32,41 @@
  * Algorithm: 
  * 1- Check if the number is negative: 
  * 		-if it is negative the first byte is negative sign.
- * 2- Convert the integer into signle decimal digits and store them in memory in Decimall
+ * 2- Convert the integer into single digits and store them in memory in
  * ASCII equivelant
- * 		Most significant digit should be stored first. 
- * 3- If the base is not 10 convert to the correct.
+ * 3- Reverse the order as the Most significant digit should be stored first. 
  * 4- Return the length.
  * 
  * @param data integer data for conversion
  * @param ptr Pointer to memory location where result of conversion is saved
  * @param base of converted data from 2 to 16. 
  *
- * @return void.
+ * @return length.
  */
  uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base);
+
+/**
+ * @brief ASCII to Integer Conversion Function 
+ *
+ * This function will take ASCII string of memory locations and converts it to integer with defined 
+ * base. 
+ * It returns the converted data  in 32 bit signed integer. 
+ * 
+ * 
+ * Algorithm: 
+ * 1- Check if the number is negative: 
+ * 		-if it is negative the first byte is negative sign.
+ * 2- Convert the integer into single digits and store them in memory in
+ * ASCII equivelant
+ * 3- Reverse the order as the Most significant digit should be stored first. 
+ * 4- Return the length.
+ * 
+ * @param ptr Pointer to memory location where string of ASCII number is placed
+ * @param digits no. of data to be converted
+ * @param base of converted data from 2 to 16. 
+ *
+ * @return data in 32 bit signed.
+ */
+int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base);
+
  #endif /*DATA.H*/

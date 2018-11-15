@@ -83,7 +83,8 @@ You should be able to support bases 2 to 16.
 The converted 32-bit signed integer should be returned.
 This function needs to handle signed data.
 You may not use any string functions or libraries
-course1.c/course.h Requirementsless 
+
+course1.c/course.h Requirements 
 These files are new and will hold some final course assessment functions. You will be provided these files from your assessment zip file.
 
 int8_t course1();

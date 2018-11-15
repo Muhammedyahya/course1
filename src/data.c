@@ -25,7 +25,14 @@
 ***********************************************************/
 
 uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base){
-	uint8_t *Start_Address = ptr;
+	// Check the validty of data
+	if (ptr==NULL){
+		return NULL; // pointer is not assigned to any memory location;
+	}
+	if((base>16)||(base<2)){
+		return NULL; // base is not correct
+	}
+	uint8_t *start_address = ptr;
 	uint8_t length=1;
 	uint8_t temp_length;
 	uint8_t ASCII_start;
@@ -55,15 +62,52 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base){
 		}
 	}
 	temp_length = length;
-	if(*Start_Address==45){ // If the number is negative point to the next location
-		ptr = Start_Address+1;
+	if(*start_address==45){ // If the number is negative point to the next location
+		ptr = start_address+1;
 		temp_length = temp_length -2;
 	}else{
-		ptr = Start_Address;
+		ptr = start_address;
 		temp_length = temp_length -1;
 	}
 	ptr = my_reverse(ptr, temp_length); // Reverse the order so That the first location 
 					    // Points to the most significant digit (MSD)
 	
 	return length;
+}
+
+int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base){
+	// Check the validty of data
+	if (ptr==NULL){
+		return NULL; // pointer is not assigned to any memory location;
+	}
+	if((base>16)||(base<2)){
+		return NULL; // base is not correct
+	}	
+	uint8_t *start_Aadress = ptr;
+	uint8_t length = 1;
+	uint8_t ASCII_start = 48;
+	int32_t data,integer_number=0;
+	int32_t data_sign = 1;
+	if(*start_address == 45){ // check the if negative sign is proceeding the string data
+		data_sign = -1;
+		ptr++;  // point to the next location
+	}
+	
+	while(length<=digits){
+		data = *ptr - ASCII_start;
+		if(data > 9){ //  base is more than 10 and digit is A, B, ...
+			data -= 17; // To obtain the decimal equivelant of A, B, ...
+		}
+		if((data > 15)||(data < 0)){
+			break; // Data is not correct the conversion stops here only. 
+		}
+		if(length == 1){
+			integer_number=data; // for the first digit;
+		}
+		integer_number = integer_number*base +data;
+		ptr++; // point to the next location;
+		length++;
+	}
+	ptr = start_address; // point to the first location again
+	return data_sign*integer_number;
 }
