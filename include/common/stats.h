@@ -54,11 +54,14 @@ void print_statistics(unsigned char* array, signed long int length);
  * @breif  Given an array of data and a length, prints the array to the screen
  * It takes a pointer to the arrray and the lenght of that array and print that
  * array in ordered format. 
+ * With its overrides
  * @param array is the pointer to the first element in the desired array
  * @param length is the length of data to be printed
  * @return <It don't return any thing>
  */ 
 void print_array(unsigned char* array, signed long int length);
+void print_array(uint8_t* array, uint8_t temp_length);
+void print_array(int8_t* array, uint8_t temp_length);
 
 /* find_median */     
 /**
