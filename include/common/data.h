@@ -7,9 +7,12 @@
  * software. Ashraf Abdalraheem are not liable for any
  * misuse of this material. 
  *
+ * This code is designed as a part of assignment belongs to the online course of Introduction to 
+ * Embedded Software & Development Environment which is a part of Embedded Software Essential Specialization
+ * Provided by University of Colorado Boulder and Coursera By Alex Fosdick
  *****************************************************************************/
 /**
- * @file data.c
+ * @file data.h
  * @brief Basic Data Manipulation
  *
  * This Header file provides a basic manipulation of data
