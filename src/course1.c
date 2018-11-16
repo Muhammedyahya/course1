@@ -21,10 +21,9 @@
  *
  */
 #include "course1.h"
-#include "memory.h"
-#include "data.h"
-#include "stats.h"
-#include <stdlib.h>
+
+
+
 
 int8_t data_set1[20] = {1 , 2 , 3 , 4 , 5 ,
 			6 , 7 , 8 , 9 , 10,
@@ -42,15 +41,15 @@ int8_t course1(){
 	test_memmove3();
 	test_memcopy();
 	test_memset();
-	test_memreverse();
-	return NULL;
+	test_reverse();
+	return 0;
 }
 
 int8_t test_data1(){
-	int8_t *local_ptr = (*int8_t) malloc(34*sizeof(int8_t));
+	uint8_t * local_ptr = (uint8_t*) malloc(34*sizeof(int8_t));
 	uint8_t length;
 	int32_t local_data;
-	length = my_itoa(12345, locat_ptr, 10);
+	length = my_itoa(12345, local_ptr, 10);
 	print_array(local_ptr,length);
 	local_data = my_atoi(local_ptr, length, 10);
 	#ifdef VERBOSE
@@ -75,11 +74,11 @@ int8_t test_data1(){
 		printf("\n Test Data is: %ld", local_data);
 	#endif
 	free((void*)local_ptr);
-	return NULL;
+	return 0;
 }
 /****************************************************************/
 int8_t test_data2(){
-	return NULL;
+	return 0;
 }
 /****************************************************************/
 int8_t test_memmove1(){
@@ -88,7 +87,7 @@ int8_t test_memmove1(){
 	destination = my_memmove(source,destination,20);
 	print_array(source,20);
 	print_array(destination,20);
-	return NULL;
+	return 0;
 }
 /****************************************************************/
 int8_t test_memmove2(){
@@ -97,7 +96,7 @@ int8_t test_memmove2(){
 	destination = my_memmove(source,destination,20);
 	print_array(source,20);
 	print_array(destination,20);
-	return NULL;
+	return 0;
 }
 /****************************************************************/
 int8_t test_memmove3(){
@@ -106,7 +105,7 @@ int8_t test_memmove3(){
 	destination = my_memmove(source,destination,20);
 	print_array(source,20);
 	print_array(destination,20);
-	return NULL;
+	return 0;
 }
 /****************************************************************/
 int8_t test_memcopy(){
@@ -119,28 +118,28 @@ int8_t test_memcopy(){
 	destination = my_memcopy(source,destination,20);
 	print_array(source,20);
 	print_array(destination,20);
-	return NULL;
+	return 0;
 }
 /****************************************************************/
 int8_t test_memset(){
-	int8_t *my_memory = (*int8_t) malloc(10*sizeof(int8_t));
+	int8_t *my_memory = (int8_t*) malloc(10*sizeof(int8_t));
 	my_memory = my_memset(my_memory,10,6);
 	print_array(my_memory,10);
 	my_memory = my_memzero(my_memory,10);
 	print_array(my_memory,10);
-	free((*void)my_memory);
-	return NULL;
+	free((void*)my_memory);
+	return 0;
 }
 
 /****************************************************************/
-int8_t test_memreverse(){
-	int8_t *my_memory = (*int8_t) malloc(20*sizeof(int8_t));
+int8_t test_reverse(){
+	int8_t *my_memory = (int8_t*) malloc(20*sizeof(int8_t));
 	my_memory = my_memzero(my_memory,20);
 	my_memory = my_memcopy(data_set1,my_memory,15);
 	print_array(my_memory,20);
 	my_memory = my_memreverse(my_memory,20);
 	print_array(my_memory,20);
-	free((*void)my_memory);
-	return NULL;
+	free((void*)my_memory);
+	return 0;
 }
 

@@ -51,7 +51,7 @@ void clear_all(char * ptr, unsigned int size){
 
 uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length){
 	/*   Check Validity of Data */
-	if(src==NULL)||(dst==NULL)||(length<=0){
+	if((src==NULL)||(dst==NULL)||(length<=0)){
 		return NULL; // Parameters are invalid
 	}
 	/*
@@ -61,7 +61,7 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length){
 	size_t i=1;
 	uint8_t * temp_dst = dst; // To return dst address 
 	if((src - dst)<length){ 
-		for(i=1;i < length;i++){
+		for(uint8_t i=1;i < length;i++){
 			// Poiting to the Bottom, 
 			dst++; // This guarantee the increment will be based on size of pointer 
 			src++;
@@ -86,12 +86,11 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length){
 
 uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length){
 	/*   Check Validity of Data */
-	if(src==NULL)||(dst==NULL)||(length<=0){
+	if((src==NULL)||(dst==NULL)||(length<=0)){
 		return NULL; // Parameters are invalid
 	}
-	size_t i=1;
 	uint8_t * temp_dst = dst; // To return dst address 
-	for(i=1;i < length;i++){
+	for(uint8_t i=1;i < length;i++){
 		*(dst) = *(src);
 		dst++;
 		src++;
@@ -101,12 +100,11 @@ uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length){
 
 uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value){
 	/*   Check Validity of Data */
-	if(src==NULL)||(length<=0){
+	if((src==NULL)||(length<=0)){
 		return NULL; // Parameters are invalid
 	}
-	size_t i=1;
 	uint8_t * temp_src = src; // To return src address 
-	for(i=1;i < length;i++){
+	for(uint8_t i=1;i < length;i++){
 		*(src) = value;
 		src++;
 	}
@@ -121,13 +119,13 @@ uint8_t * my_memzero(uint8_t * src, size_t length){
 
 uint8_t * my_reverse(uint8_t * src, size_t length){
 	/*   Check Validity of Data */
-	if(src==NULL)||(length<=0){
+	if((src==NULL)||(length<=0)){
 		return NULL; // Parameters are invalid
 	}
 	size_t i=1;
 	uint8_t * temp_src = src;
 	uint8_t * temp2_src = src; // To return src address 
-	for(i=1;i < length;i++){
+	for(uint8_t i=1;i < length;i++){
 		// Poiting to the Bottom, 
 		temp_src++; // This guarantee the increment will be based on size of pointer 
 	}
@@ -139,7 +137,7 @@ uint8_t * my_reverse(uint8_t * src, size_t length){
 	return temp2_src;
 }
 int32_t * reserve_words(size_t length){
-	return ((int32_t*)malloc(length*sizeof(int32_t));
+	return ((int32_t*)malloc(length*sizeof(int32_t)));
 }
 
 void free_words(int32_t * src){

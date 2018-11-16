@@ -23,6 +23,11 @@
 #ifndef __COURSE1_H__
 #define __COURSE1_H__
 
+#include <stdlib.h>
+#include <inttypes.h>
+#include "memory.h"
+#include "data.h"
+#include "stats.h"
 /*
  * @brief Test Data and memory manipulation
  *

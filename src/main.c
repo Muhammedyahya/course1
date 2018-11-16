@@ -16,9 +16,9 @@
  * @date Nov  10 2018
  */
 
+
+
 #include "course1.h"
-
-
 /* A pretty short main file */
 int main(void) {
   #ifdef COURSE1   // Use compile time switch to execute this function

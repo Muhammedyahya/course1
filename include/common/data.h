@@ -23,6 +23,8 @@
  */
  #ifndef __DATA_H__
  #define __DATA_H__
+ #include <stdlib.h>
+ #include <stdint.h>
  /**
  * @brief Integer to ASCII Conversion Function 
  *

@@ -20,7 +20,8 @@
  */
 #ifndef __STATS_H__
 #define __STATS_H__
-
+#include <stdlib.h>
+#include <stdint.h>
 /* Add Your Declarations and Function Comments here */ 
 
 /**

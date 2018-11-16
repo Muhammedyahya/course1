@@ -122,6 +122,15 @@ void print_array(unsigned char* array, signed long int temp_length){
 		}
 	#endif
 }
+/****************************************************************/
+void print_array(uint8_t* array, uint8_t temp_length){
+	print_array((unsigned char*)array,(signed long int) temp_length);
+}
+/****************************************************************/
+void print_array(int8_t* array, uint8_t temp_length){
+	print_array((unsigned char*)array,(signed long int) temp_length);
+}
+/****************************************************************/
 char find_median(unsigned char* array,signed long int temp_length){
 	if(check_validity(array,temp_length)){
 		unsigned int length=(unsigned int)temp_length;
