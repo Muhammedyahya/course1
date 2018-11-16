@@ -7,6 +7,9 @@
  * software. Alex Fosdick and the University of Colorado are not liable for any
  * misuse of this material. 
  *
+ * This code is designed as a part of assignment belongs to the online course of Introduction to 
+ * Embedded Software & Development Environment which is a part of Embedded Software Essential Specialization
+ * Provided by University of Colorado Boulder and Coursera By Alex Fosdick
  *****************************************************************************/
 /**
  * @file memory.h
@@ -17,7 +20,8 @@
  *
  * @author Alex Fosdick
  * @date April 1 2017
- *
+ * @modified by Ashraf Abdalraheem	
+ * @date November 14 2018
  */
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
