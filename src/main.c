@@ -16,7 +16,8 @@
  * @date Nov  10 2018
  */
 
-#include "course1.c"
+#include "course1.h"
+
 
 /* A pretty short main file */
 int main(void) {

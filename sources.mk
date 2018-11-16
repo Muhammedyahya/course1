@@ -22,12 +22,13 @@ SOURCES = src/main.c\
 	  src/stats.c
 
 # Add your include paths to this variable
-INCLUDES =    -I/include/common
+INCLUDES =    -I include/common
 
 #Additional sources and include paths for MSP432 Platform
 ifeq ($(PLATFORM),MSP432)
   SOURCES += src/interrupts_msp432p401r_gcc.c\
  	     src/startup_msp432p401r_gcc.c   \
  	     src/system_msp432p401r.c	
-  INCLUDES += -I/include/CMSIS\
- 	      -I/include/msp432
+  INCLUDES += -I include/CMSIS\
+ 	      -I include/msp432
+endif

@@ -21,9 +21,10 @@
  *
  */
 #include "course1.h"
-#include "memory.c"
-#include "data.c"
-#include "stats.c"
+#include "memory.h"
+#include "data.h"
+#include "stats.h"
+#include <stdlib.h>
 
 int8_t data_set1[20] = {1 , 2 , 3 , 4 , 5 ,
 			6 , 7 , 8 , 9 , 10,
