@@ -25,12 +25,13 @@
 
 
 #include "stats.h"
-
+#include <stdlib.h>
+#include "platform.h"
 /* Size of the Data Set */
 #define SIZE (40)
 /* Add other Implementation File Code Here */
 
-char find_mean(unsigned char* array,signed long int temp_length){
+char find_mean(unsigned char* array,unsigned int temp_length){
 	if(check_validity(array,temp_length)){
 		unsigned int length= (unsigned int) temp_length;
 		long long int sum=0;
@@ -54,18 +55,10 @@ void swap(unsigned char* variable1,unsigned char* variable2){
 	}
 }
 // Function Override to Take integer variables
-void swap(uint8_t* variable1,uint8_t* variable2){
-	if((variable1==NULL)||(variable2==NULL)){
-		PRINTF("\n Error:Pointers are not valid!");
-	}
-	else{
-		uint8_t temp=0;
-		temp = *variable2;
-		*variable2 = *variable1;
-		*variable1 = temp;
-	}
+void swap_uint8(uint8_t* variable1,uint8_t* variable2){
+	swap((unsigned char*)variable1, (unsigned char*)variable2);
 }
-long int find_minimum(unsigned char* array, signed long int temp_length){
+long int find_minimum(unsigned char* array, unsigned int temp_length){
 	if(check_validity(array,temp_length)){
 		unsigned int length = (unsigned int) temp_length;
 		unsigned int i=1;
@@ -79,7 +72,7 @@ long int find_minimum(unsigned char* array, signed long int temp_length){
 	}
 	return 0;
 }
-long int find_maximum(unsigned char* array, signed long int temp_length){
+long int find_maximum(unsigned char* array, unsigned int temp_length){
 	if(check_validity(array,temp_length)){
 		unsigned int length=(unsigned int)temp_length;
 		unsigned int i=1;
@@ -94,7 +87,7 @@ long int find_maximum(unsigned char* array, signed long int temp_length){
 	return 0;	
 }
 			       
-void sort_array(unsigned char* array, signed long int temp_length){
+void sort_array(unsigned char* array, unsigned int temp_length){
 	if(check_validity(array,temp_length)){
 		unsigned int length=(unsigned int)temp_length;
 		unsigned int i=0;
@@ -107,13 +100,13 @@ void sort_array(unsigned char* array, signed long int temp_length){
 		}
 	}
 }
-void print_array(unsigned char* array, signed long int temp_length){
+void print_array(unsigned char* array, unsigned int temp_length){
 	#ifdef VERBOSE  // Print Only if Debugging is enabled!
 		if(check_validity(array,temp_length)){
 			unsigned int length=(unsigned int)temp_length;
 			PRINTF("\n");
 			for(unsigned int i=0;i<length;i++){
-				if((i%4)==0){
+				if((i%5)==0){
 					PRINTF("\n");
 				}
 				PRINTF("	%d",array[i]);
@@ -123,15 +116,13 @@ void print_array(unsigned char* array, signed long int temp_length){
 	#endif
 }
 /****************************************************************/
-void print_array(uint8_t* array, uint8_t temp_length){
-	print_array((unsigned char*)array,(signed long int) temp_length);
+//*** Function override to print uint8 variable types ****// 
+void print_array_uint8(uint8_t* array, uint8_t temp_length){
+	print_array((unsigned char*)array,(unsigned int) temp_length);
 }
+
 /****************************************************************/
-void print_array(int8_t* array, uint8_t temp_length){
-	print_array((unsigned char*)array,(signed long int) temp_length);
-}
-/****************************************************************/
-char find_median(unsigned char* array,signed long int temp_length){
+char find_median(unsigned char* array,unsigned int temp_length){
 	if(check_validity(array,temp_length)){
 		unsigned int length=(unsigned int)temp_length;
 		sort_array(array,length);
@@ -143,16 +134,15 @@ char find_median(unsigned char* array,signed long int temp_length){
 		}
 return 0;
 }
-void print_statistics(unsigned char* array,signed long int temp_length){
-	if(check_validity(array,temp_length)){
-		unsigned int length=(unsigned int)temp_length;
+void print_statistics(unsigned char* array,unsigned int length){
+	if(check_validity(array,length)){
 		PRINTF("\n******************* The Statistics *************** \n The mean is : %d",find_mean(array,length));
 		PRINTF("\n The max is : %ld",find_maximum(array,length));
 		PRINTF("\n The Mini is: %ld",find_minimum(array,length));
 		PRINTF("\n The median is: %d\n",find_median(array,length));
 	}
 }	
-int check_validity(unsigned char* array , signed long int length){
+int check_validity(unsigned char* array , unsigned int length){
 	if(array == NULL){
 		PRINTF("\n The pointer is not pointing to anything");
 		return 0; // The pointer is not pointing to anything 

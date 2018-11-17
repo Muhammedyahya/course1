@@ -21,57 +21,59 @@
  *
  */
 #include "course1.h"
+#include "memory.h"
+#include "data.h"
+#include "stats.h"
+#include "platform.h"
 
 
-
-
-int8_t data_set1[20] = {1 , 2 , 3 , 4 , 5 ,
+uint8_t data_set1[20] = {1 , 2 , 3 , 4 , 5 ,
 			6 , 7 , 8 , 9 , 10,
-			20, 22, 24, 26, 28,
-			33, 33, 44, 44, 55};
+			11, 12, 13, 14, 15,
+			16, 17, 18, 19, 20};
 
 /***********************************************************
  Function Definitions
 ***********************************************************/
 int8_t course1(){
-	test_data1();
-	test_data2();
+	//test_data1();
+	//test_data2();
 	test_memmove1();
 	test_memmove2();
 	test_memmove3();
 	test_memcopy();
-	test_memset();
-	test_reverse();
+	/*test_memset();
+	test_reverse();*/
 	return 0;
 }
 
 int8_t test_data1(){
 	uint8_t * local_ptr = (uint8_t*) malloc(34*sizeof(int8_t));
 	uint8_t length;
-	int32_t local_data;
+	
 	length = my_itoa(12345, local_ptr, 10);
-	print_array(local_ptr,length);
-	local_data = my_atoi(local_ptr, length, 10);
+	print_array_uint8(local_ptr,length);
+	
 	#ifdef VERBOSE
-		printf("\n Test Data is: %ld", local_data);
+		PRINTF("\n Test Data is: %d", my_atoi(local_ptr, length, 10));
 	#endif
-	length = my_itoa(-12345, locat_ptr, 10);
-	print_array(local_ptr,length);
-	local_data = my_atoi(local_ptr, length, 10);
+	length = my_itoa(-12345, local_ptr, 10);
+	print_array_uint8(local_ptr,length);
+	
 	#ifdef VERBOSE
-		printf("\n Test Data is: %ld", local_data);
+		PRINTF("\n Test Data is: %d", my_atoi(local_ptr, length, 10));
 	#endif
-	length = my_itoa(-123, locat_ptr, 2);
-	print_array(local_ptr,length);
-	local_data = my_atoi(local_ptr, length, 10);
+	length = my_itoa(-123, local_ptr, 2);
+	print_array_uint8(local_ptr,length);
+	
 	#ifdef VERBOSE
-		printf("\n Test Data is: %ld", local_data);
+		PRINTF("\n Test Data is: %d", my_atoi(local_ptr, length, 10));
 	#endif
-	length = my_itoa(-1234567, locat_ptr, 16);
-	print_array(local_ptr,length);
-	local_data = my_atoi(local_ptr, length, 10);
+	length = my_itoa(-1234567, local_ptr, 16);
+	print_array_uint8(local_ptr,length);
+	
 	#ifdef VERBOSE
-		printf("\n Test Data is: %ld", local_data);
+		PRINTF("\n Test Data is: %d", my_atoi(local_ptr, length, 10));
 	#endif
 	free((void*)local_ptr);
 	return 0;
@@ -82,63 +84,99 @@ int8_t test_data2(){
 }
 /****************************************************************/
 int8_t test_memmove1(){
-	int8_t *source=data_set1;
-	int8_t *destination = source + 25;
+	uint8_t *source=data_set1;
+	uint8_t *destination = source + 25;
+	
 	destination = my_memmove(source,destination,20);
-	print_array(source,20);
-	print_array(destination,20);
+	#ifdef VERBOSE
+		PRINTF("\n Test Movement No overlap ");
+		PRINTF("\n Before Movement:\n ");
+	#endif
+	print_array_uint8(source,20);
+	#ifdef VERBOSE
+		PRINTF("\n After Movement:\n ");
+	#endif
+	print_array_uint8(destination,20);
 	return 0;
 }
 /****************************************************************/
 int8_t test_memmove2(){
-	int8_t *source=data_set1;
-	int8_t *destination = source - 5; // Destination start is before sourse start by 5 memory locations
+	uint8_t *source=data_set1;
+	uint8_t *destination = source - 5; // Destination start is before sourse start by 5 memory locations
 	destination = my_memmove(source,destination,20);
-	print_array(source,20);
-	print_array(destination,20);
+	#ifdef VERBOSE
+		PRINTF("\n Test Movement overlap End Dest, Start Source ");
+		PRINTF("\n Before Movement:\n ");
+	#endif
+	print_array_uint8(source,20);
+	#ifdef VERBOSE
+		PRINTF("\n After Movement:\n ");
+	#endif
+	print_array_uint8(destination,20);
 	return 0;
 }
 /****************************************************************/
 int8_t test_memmove3(){
-	int8_t *source=data_set1;
-	int8_t *destination = source + 5;  // Destination start is after sourse start by 5 memory locations
+	uint8_t *source=data_set1;
+	uint8_t *destination = source + 5;  // Destination start is after sourse start by 5 memory locations
 	destination = my_memmove(source,destination,20);
-	print_array(source,20);
-	print_array(destination,20);
+	#ifdef VERBOSE
+		PRINTF("\n Test Movement overlap Start Dest, End source ");
+		PRINTF("\n Before Movement:\n ");
+	#endif
+	print_array_uint8(source,20);
+	#ifdef VERBOSE
+		PRINTF("\n After Movement:\n ");
+	#endif
+	print_array_uint8(destination,20);
 	return 0;
 }
 /****************************************************************/
 int8_t test_memcopy(){
-	int8_t *source=data_set1;
-	int8_t *destination = source + 25;  
+	uint8_t *source=data_set1;
+	uint8_t *destination = source + 25;  
 	destination = my_memcopy(source,destination,20);
-	print_array(source,20);
-	print_array(destination,20);
+	#ifdef VERBOSE
+		PRINTF("\n Test Copy No-overlap ");
+		PRINTF("\n Before Copy:\n ");
+	#endif	
+	print_array_uint8(source,20);
+	#ifdef VERBOSE
+		PRINTF("\n After Copy:\n ");
+	#endif
+	print_array_uint8(destination,20);
 	destination = source + 5;
 	destination = my_memcopy(source,destination,20);
-	print_array(source,20);
-	print_array(destination,20);
+	#ifdef VERBOSE
+		PRINTF("\n Test Copy overlap Start Dst, End Source ");
+		PRINTF("\n Before Copy:\n ");
+	#endif	
+	print_array_uint8(source,20);
+	#ifdef VERBOSE
+		PRINTF("\n After Copy:\n ");
+	#endif
+	print_array_uint8(destination,20);
 	return 0;
 }
 /****************************************************************/
 int8_t test_memset(){
-	int8_t *my_memory = (int8_t*) malloc(10*sizeof(int8_t));
+	uint8_t *my_memory = (uint8_t*) malloc(10*sizeof(int8_t));
 	my_memory = my_memset(my_memory,10,6);
-	print_array(my_memory,10);
+	print_array_uint8(my_memory,10);
 	my_memory = my_memzero(my_memory,10);
-	print_array(my_memory,10);
+	print_array_uint8(my_memory,10);
 	free((void*)my_memory);
 	return 0;
 }
 
 /****************************************************************/
 int8_t test_reverse(){
-	int8_t *my_memory = (int8_t*) malloc(20*sizeof(int8_t));
+	uint8_t *my_memory = (uint8_t*) malloc(20*sizeof(int8_t));
 	my_memory = my_memzero(my_memory,20);
 	my_memory = my_memcopy(data_set1,my_memory,15);
-	print_array(my_memory,20);
-	my_memory = my_memreverse(my_memory,20);
-	print_array(my_memory,20);
+	print_array_uint8(my_memory,20);
+	my_memory = my_reverse(my_memory,20);
+	print_array_uint8(my_memory,20);
 	free((void*)my_memory);
 	return 0;
 }

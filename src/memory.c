@@ -21,7 +21,7 @@
  *
  */
 #include "memory.h"
-
+#include <stdlib.h>
 /***********************************************************
  Function Definitions
 ***********************************************************/
@@ -60,28 +60,29 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length){
 	*/
 	size_t i=1;
 	uint8_t * temp_dst = dst; // To return dst address 
-	if((src - dst)<length){ 
+	uint8_t * temp_src = src; // Data manipulation in temporary pointer
+	if((temp_src - temp_dst)<length){ 
 		for(uint8_t i=1;i < length;i++){
 			// Poiting to the Bottom, 
-			dst++; // This guarantee the increment will be based on size of pointer 
-			src++;
+			temp_dst++; // This guarantee the increment will be based on size of pointer 
+			temp_src++;
 		}
 		for(i=1;i < length;i++){
-			*(dst) = *(src);
-			dst--;
-			src--;
+			*(temp_dst) = *(temp_src);
+			temp_dst--;
+			temp_src--;
 		}
 	}else{
 	/*
 	 * No Overlap Start from the Top
 	*/	
 		for(i=1;i < length;i++){
-			*(dst) = *(src);
-			dst++;
-			src++;
+			*(temp_dst) = *(temp_src);
+			temp_dst++;
+			temp_src++;
 		}
 	}
-	return temp_dst;
+	return dst;
 }
 
 uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length){
@@ -130,7 +131,7 @@ uint8_t * my_reverse(uint8_t * src, size_t length){
 		temp_src++; // This guarantee the increment will be based on size of pointer 
 	}
 	for(i=1;i < (length/2);i++){
-		swap(src, temp_src);
+		swap_uint8(src, temp_src);
 		src++;
 		temp_src--;
 	}

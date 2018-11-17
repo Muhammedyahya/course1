@@ -22,7 +22,8 @@
  *
  */
 #include "data.h"
-
+#include <stdlib.h> 
+#include "memory.h"
 /***********************************************************
  Function Definitions
 ***********************************************************/
@@ -30,10 +31,10 @@
 uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base){
 	// Check the validty of data
 	if (ptr==NULL){
-		return NULL; // pointer is not assigned to any memory location;
+		return 0; // pointer is not assigned to any memory location;
 	}
 	if((base>16)||(base<2)){
-		return NULL; // base is not correct
+		return 0; // base is not correct
 	}
 	uint8_t *start_address = ptr;
 	uint8_t length=1;
@@ -60,7 +61,7 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base){
 		ptr++;            // point to the next location
 		length++;    
 		if((data==0)){    // The number division is completed
-			*ptr=NULL; // Terminate by NULL
+			(*ptr) = *((uint8_t*) NULL); // Terminate by NULL
 			break; 
 		}
 	}
@@ -81,12 +82,12 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base){
 int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base){
 	// Check the validty of data
 	if (ptr==NULL){
-		return NULL; // pointer is not assigned to any memory location;
+		return 0; // pointer is not assigned to any memory location;
 	}
 	if((base>16)||(base<2)){
-		return NULL; // base is not correct
+		return 0; // base is not correct
 	}	
-	uint8_t *start_Aadress = ptr;
+	uint8_t *start_address = ptr;
 	uint8_t length = 1;
 	uint8_t ASCII_start = 48;
 	int32_t data,integer_number=0;

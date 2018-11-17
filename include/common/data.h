@@ -15,7 +15,7 @@
  * @file data.h
  * @brief Basic Data Manipulation
  *
- * This Header file provides a basic manipulation of data
+ * This abstraction file provides interface to funtion perform basic manipulation of data
  *
  * @author Ashraf Abdalraheem
  * @date Nov 14 2018
@@ -23,7 +23,6 @@
  */
  #ifndef __DATA_H__
  #define __DATA_H__
- #include <stdlib.h>
  #include <stdint.h>
  /**
  * @brief Integer to ASCII Conversion Function 

@@ -14,7 +14,7 @@
  * @file course1.h
  * @brief Test memory and data manipulation
  *
- * This implementation file provides functions to test the data and memory manipulation functions
+ * This abstraction file provides interface to function declaration to test the data and memory manipulation functions
  *
  * @author Ashraf Abdalraheem
  * @date Nov 16 2018
@@ -22,12 +22,7 @@
  */
 #ifndef __COURSE1_H__
 #define __COURSE1_H__
-
-#include <stdlib.h>
-#include <inttypes.h>
-#include "memory.h"
-#include "data.h"
-#include "stats.h"
+#include <stdint.h>
 /*
  * @brief Test Data and memory manipulation
  *

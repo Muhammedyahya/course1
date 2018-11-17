@@ -35,8 +35,9 @@
 #
 #------------------------------------------------------------------------------
 include sources.mk
+
 # Architectures Specific Flags
-LINKER_FILE =  -T ../msp432p401r.lds
+LINKER_FILE =  -T msp432p401r.lds
 CPU = cortex-m4
 ARCH = armv7e-m
 SPECS = nosys.specs
@@ -52,6 +53,14 @@ CFLAGS  := -Wall  \
 	  -std=c99
 CPPFLAGs = -E
 ASFLAGS  = -S
+# Debug flag
+ifeq ($(DEBUG),VERBOSE)
+  CFLAGS += -D$(DEBUG)
+endif
+# Include course1 function
+ifeq ($(COURSE),COURSE1)
+  CFLAGS += -D$(COURSE)
+endif
 # Default Platform
 # PLATFORM = HOST # Remove the comment to make the default platform is host!
 # Platform Overrides
@@ -93,6 +102,6 @@ $(TARGET).out: $(OBJS) $(DEP)
 
 .PHONY: clean
 clean: 
-	rm -f *.dep *.d *.i *.o *.asm *.out
+	rm -f src/*.dep src/*.d src/*.i src/*.o src/*.asm src/*.out *.dep *.d *.i *.o *.asm *.out
 	ls -la
 

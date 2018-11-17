@@ -19,9 +19,11 @@
 
 
 #include "course1.h"
+#include <stdlib.h>
+#include "platform.h"
 /* A pretty short main file */
 int main(void) {
-  #ifdef COURSE1   // Use compile time switch to execute this function
+  #ifdef COURSE1   // Use compile time switch to execute this function	
 	course1();
   #endif
   return 0;
