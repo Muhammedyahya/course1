@@ -84,8 +84,8 @@ int8_t test_data2(){
 }
 /****************************************************************/
 int8_t test_memmove1(){
-	uint8_t *source=data_set1;
-	uint8_t *destination = source + 25;
+	uint8_t * source=data_set1;
+	uint8_t * destination = source + 25;
 	
 	destination = my_memmove(source,destination,20);
 	#ifdef VERBOSE
@@ -101,8 +101,11 @@ int8_t test_memmove1(){
 }
 /****************************************************************/
 int8_t test_memmove2(){
-	uint8_t *source=data_set1;
-	uint8_t *destination = source - 5; // Destination start is before sourse start by 5 memory locations
+	uint8_t * source=data_set1;
+	uint8_t * destination = source; // Destination start is before sourse start by 5 memory locations
+	for(int i=0;i<5;i++){
+		destination++;	
+	}
 	destination = my_memmove(source,destination,20);
 	#ifdef VERBOSE
 		PRINTF("\n Test Movement overlap End Dest, Start Source ");
@@ -118,7 +121,7 @@ int8_t test_memmove2(){
 /****************************************************************/
 int8_t test_memmove3(){
 	uint8_t *source=data_set1;
-	uint8_t *destination = source + 5;  // Destination start is after sourse start by 5 memory locations
+	uint8_t *destination = source + 10;  // Destination start is after sourse start by 5 memory locations
 	destination = my_memmove(source,destination,20);
 	#ifdef VERBOSE
 		PRINTF("\n Test Movement overlap Start Dest, End source ");
