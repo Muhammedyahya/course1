@@ -44,7 +44,7 @@ SPECS = nosys.specs
 
 # Compiler Flags and Defines
 LD = arm-none-eabi-ld
-TARGET  = c1m2
+TARGET  = course1
 LDFLAGS = -Wl,-Map=$(TARGET).map\
 	  -O0
 CFLAGS  := -Wall  \
@@ -102,7 +102,7 @@ $(TARGET).out: $(OBJS) $(DEP)
 
 .PHONY: clean
 clean: 
-	rm -f src/*.dep src/*.d src/*.i src/*.o src/*.asm src/*.out *.dep *.d *.i *.o *.asm *.out
+	rm -f src/*.dep src/*.d src/*.i src/*.o src/*.asm src/*.out *.dep *.d *.i *.o *.asm *.out *.map
 	ls -la
 .PHONY: rebuild
 rebuild: clean build
