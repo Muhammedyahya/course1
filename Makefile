@@ -104,4 +104,7 @@ $(TARGET).out: $(OBJS) $(DEP)
 clean: 
 	rm -f src/*.dep src/*.d src/*.i src/*.o src/*.asm src/*.out *.dep *.d *.i *.o *.asm *.out
 	ls -la
+.PHONY: rebuild
+rebuild: clean build
+	
 
