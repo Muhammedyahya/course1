@@ -78,8 +78,7 @@ endif
 
 OBJS  := $(SOURCES:.c=.o)
 %.o : %.c
-	$(CC) -c $< $(CFLAGS) -D$(PLATFORM) $(INCLUDES) -o $@
-	$(SIZEUTIL) -Btd $@ 
+	$(CC) -c $< $(CFLAGS) -D$(PLATFORM) $(INCLUDES) -o $@ 
 PRES  := $(SOURCES:.c=.i)
 %.i : %.c
 	$(CC) -E $(INCLUDES) -D$(PLATFORM) $(CLFAGS) $< -o $@
