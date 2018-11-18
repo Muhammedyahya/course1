@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright (C) 2018 by Ashraf Abdalraheem
+ * Copyright (C) TEST_ARRAY_SIZE18 by Ashraf Abdalraheem
  *
  * Redistribution, modification or use of this software in source or binary
  * forms is permitted as long as the files maintain this copyright. Users are 
@@ -17,7 +17,7 @@
  * This implementation file provides functions to test the data and memory manipulation functions
  *
  * @author Ashraf Abdalraheem
- * @date Nov 16 2018
+ * @date Nov 16 TEST_ARRAY_SIZE18
  *
  */
 #include "course1.h"
@@ -25,12 +25,14 @@
 #include "data.h"
 #include "stats.h"
 #include "platform.h"
+#define OVERLAP1 7
+#define OVERLAP2 11
+#define TEST_ARRAY_SIZE 20
 
-
-uint8_t data_set1[20] = {1 , 2 , 3 , 4 , 5 ,
-			6 , 7 , 8 , 9 , 10,
-			11, 12, 13, 14, 15,
-			16, 17, 18, 19, 20};
+uint8_t data_set1[TEST_ARRAY_SIZE] =   {1 , 2 , 3 , 4 , 5 ,
+					6 , 7 , 8 , 9 , 10,
+					11, 12, 13, 14, 15,
+					16, 17, 18, 19, 20};
 
 /***********************************************************
  Function Definitions
@@ -41,8 +43,8 @@ int8_t course1(){
 	test_memmove1();
 	test_memmove2();
 	test_memmove3();
-	test_memcopy();
-	/*test_memset();
+	/*test_memcopy();
+	test_memset();
 	test_reverse();*/
 	return 0;
 }
@@ -84,81 +86,79 @@ int8_t test_data2(){
 }
 /****************************************************************/
 int8_t test_memmove1(){
-	uint8_t * source=data_set1;
-	uint8_t * destination = source + 25;
 	
-	destination = my_memmove(source,destination,20);
+	uint8_t * destination = data_set1 + 25;
 	#ifdef VERBOSE
-		PRINTF("\n Test Movement No overlap ");
-		PRINTF("\n Before Movement:\n ");
+		PRINTF("\n Test Movement 1 No overlap ");
+		PRINTF("\n Before Movement @ Location %#08X\n ",(unsigned int)((long int)data_set1%1000));
 	#endif
-	print_array_uint8(source,20);
+	print_array_uint8(data_set1,TEST_ARRAY_SIZE);
+	destination = my_memmove(data_set1,destination,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
-		PRINTF("\n After Movement:\n ");
+		PRINTF("\n After Movement @ location %#08X\n ",(unsigned int)((long int)destination%1000));
 	#endif
-	print_array_uint8(destination,20);
+	print_array_uint8(destination,TEST_ARRAY_SIZE);
 	return 0;
 }
 /****************************************************************/
 int8_t test_memmove2(){
-	uint8_t * source=data_set1;
-	uint8_t * destination = source; // Destination start is before sourse start by 5 memory locations
-	for(int i=0;i<5;i++){
-		destination++;	
-	}
-	destination = my_memmove(source,destination,20);
+	uint8_t *source = data_set1;	
+	uint8_t * destination = source - OVERLAP1; // Destination start is before sourse start by 5 memory locations	
 	#ifdef VERBOSE
-		PRINTF("\n Test Movement overlap End Dest, Start Source ");
-		PRINTF("\n Before Movement:\n ");
+		PRINTF("\n Test Movement 2 overlap End of Dest Before Start of Source ");
+		PRINTF("\n Before Movement @ Location %#08X\n ",(unsigned int)((long int)data_set1%1000));
 	#endif
-	print_array_uint8(source,20);
+	print_array_uint8(data_set1,TEST_ARRAY_SIZE);
+	my_memmove(source,destination,TEST_ARRAY_SIZE);	
 	#ifdef VERBOSE
-		PRINTF("\n After Movement:\n ");
+		PRINTF("\n After Movement @ location %#08X\n ",(unsigned int)((long int)destination%1000));
 	#endif
-	print_array_uint8(destination,20);
+	print_array_uint8(destination,TEST_ARRAY_SIZE);
+	my_memmove(destination,data_set1,TEST_ARRAY_SIZE); // Return the data to its place!
 	return 0;
 }
 /****************************************************************/
 int8_t test_memmove3(){
-	uint8_t *source=data_set1;
-	uint8_t *destination = source + 10;  // Destination start is after sourse start by 5 memory locations
-	destination = my_memmove(source,destination,20);
+	uint8_t *source = data_set1;
+	uint8_t *destination = source + OVERLAP2;  // Destination start is after sourse start by 5 memory locations
+	
 	#ifdef VERBOSE
-		PRINTF("\n Test Movement overlap Start Dest, End source ");
-		PRINTF("\n Before Movement:\n ");
-	#endif
-	print_array_uint8(source,20);
+		PRINTF("\n Test Movement 3 overlap Start of Dest before End of source ");
+		PRINTF("\n Before Movement @ Location %#08X\n ",(unsigned int)((long int)data_set1%1000));
+	#endif	
+	print_array_uint8(source,TEST_ARRAY_SIZE);
+	destination = my_memmove(source,destination,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
-		PRINTF("\n After Movement:\n ");
+		PRINTF("\n After Movement @ location %#08X\n ",(unsigned int)((long int)destination%1000));
 	#endif
-	print_array_uint8(destination,20);
+	print_array_uint8(destination,TEST_ARRAY_SIZE);
 	return 0;
 }
 /****************************************************************/
 int8_t test_memcopy(){
 	uint8_t *source=data_set1;
 	uint8_t *destination = source + 25;  
-	destination = my_memcopy(source,destination,20);
+	destination = my_memcopy(source,destination,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
 		PRINTF("\n Test Copy No-overlap ");
 		PRINTF("\n Before Copy:\n ");
 	#endif	
-	print_array_uint8(source,20);
+	print_array_uint8(source,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
 		PRINTF("\n After Copy:\n ");
 	#endif
-	print_array_uint8(destination,20);
+	print_array_uint8(destination,TEST_ARRAY_SIZE);
 	destination = source + 5;
-	destination = my_memcopy(source,destination,20);
+	destination = my_memcopy(source,destination,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
 		PRINTF("\n Test Copy overlap Start Dst, End Source ");
 		PRINTF("\n Before Copy:\n ");
 	#endif	
-	print_array_uint8(source,20);
+	print_array_uint8(source,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
 		PRINTF("\n After Copy:\n ");
 	#endif
-	print_array_uint8(destination,20);
+	print_array_uint8(destination,TEST_ARRAY_SIZE);
 	return 0;
 }
 /****************************************************************/
@@ -174,12 +174,12 @@ int8_t test_memset(){
 
 /****************************************************************/
 int8_t test_reverse(){
-	uint8_t *my_memory = (uint8_t*) malloc(20*sizeof(int8_t));
-	my_memory = my_memzero(my_memory,20);
+	uint8_t *my_memory = (uint8_t*) malloc(TEST_ARRAY_SIZE*sizeof(int8_t));
+	my_memory = my_memzero(my_memory,TEST_ARRAY_SIZE);
 	my_memory = my_memcopy(data_set1,my_memory,15);
-	print_array_uint8(my_memory,20);
-	my_memory = my_reverse(my_memory,20);
-	print_array_uint8(my_memory,20);
+	print_array_uint8(my_memory,TEST_ARRAY_SIZE);
+	my_memory = my_reverse(my_memory,TEST_ARRAY_SIZE);
+	print_array_uint8(my_memory,TEST_ARRAY_SIZE);
 	free((void*)my_memory);
 	return 0;
 }

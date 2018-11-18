@@ -22,6 +22,7 @@
  */
 #include "memory.h"
 #include <stdlib.h>
+#include "platform.h"
 /***********************************************************
  Function Definitions
 ***********************************************************/
@@ -61,27 +62,29 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length){
 	size_t i=1;
 	uint8_t * temp_dst = dst; // To return dst address 
 	uint8_t * temp_src = src; // Data manipulation in temporary pointer
-	if((temp_src - temp_dst)<length){ 
-		for(uint8_t i=1;i <= length;i++){
-			// Poiting to the Bottom, 
+	if((temp_dst - temp_src)<length){ 
+		for(uint8_t i=1;i < length;i++){
+			// Pointing to the Bottom, 
 			temp_dst++; // This guarantee the increment will be based on size of pointer 
 			temp_src++;
 		}
 		for(i=1;i <= length;i++){
-			*(temp_dst) = *(temp_src);
+			*temp_dst = *temp_src;
 			temp_dst--;
 			temp_src--;
+			
 		}
 	}else{
 	/*
 	 * No Overlap Start from the Top
-	*/	
+	 */	
 		for(i=1;i <= length;i++){
 			*(temp_dst) = *(temp_src);
 			temp_dst++;
 			temp_src++;
 		}
 	}
+	src = dst; // Since data has moved the source should equal to destination now!!
 	return dst;
 }
 
