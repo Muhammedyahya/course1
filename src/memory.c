@@ -94,7 +94,7 @@ uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length){
 		return NULL; // Parameters are invalid
 	}
 	uint8_t * temp_dst = dst; // To return dst address 
-	for(uint8_t i=1;i < length;i++){
+	for(uint8_t i=1;i <= length;i++){
 		*(dst) = *(src);
 		dst++;
 		src++;
@@ -108,7 +108,7 @@ uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value){
 		return NULL; // Parameters are invalid
 	}
 	uint8_t * temp_src = src; // To return src address 
-	for(uint8_t i=1;i < length;i++){
+	for(uint8_t i=1;i <= length;i++){
 		*(src) = value;
 		src++;
 	}
