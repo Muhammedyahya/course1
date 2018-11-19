@@ -21,6 +21,7 @@
  *
  */
 #include "course1.h"
+#include <stdio.h>
 #include "memory.h"
 #include "data.h"
 #include "stats.h"
@@ -28,8 +29,29 @@
 #define OVERLAP1 7
 #define OVERLAP2 11
 #define TEST_ARRAY_SIZE 20
-#define NO_OVER_LAP 21
+#define NO_OVER_LAP 25
 #define SET_VALUE  7
+#define TRUE 1
+#define FALSE 0
+/*
+ * @brief Test Data between two memory location if equal return TRUE, Else return false
+ *
+ * 
+ * @param source1 pointer to first memory location
+ * @param source2 pointer to second memory location
+ * @return TRUE/FALSE
+ */
+static int8_t my_compare(uint8_t* source1,uint8_t* source2, uint8_t length);
+/*
+ * @brief Test Data between a memory location and value if equal return TRUE, Else return false
+ *
+ * 
+ * @param source1 pointer to first memory location
+ * @param value to compare with
+ * @return TRUE/FALSE
+ */
+static int8_t my_compare_set(uint8_t* source1,uint8_t value, uint8_t length);
+
 uint8_t data_set1[TEST_ARRAY_SIZE+20]= {1 , 2 , 3 , 4 , 5 ,
 					6 , 7 , 8 , 9 , 10,
 					11, 12, 13, 14, 15,
@@ -43,15 +65,15 @@ uint8_t data_set2[TEST_ARRAY_SIZE] =   {1 , 2 , 3 , 4 , 5 ,
  Function Definitions
 ***********************************************************/
 int8_t course1(){
-	const char *test_result[2] = {"FAIL", "PASS"};
-	PRINTF("Test Data 1 function result: %s",test_result[test_data1()]);
-	PRINTF("Test Data 2 function result: %s",test_result[test_data2()]);
-	PRINTF("Test Move Data 1 function result: %s",test_result[test_memmove1()]);
-	PRINTF("Test Move Data 2 function result: %s",test_result[test_memmove2()]);
-	PRINTF("Test Move Data 3 function result: %s",test_result[test_memmove3()]);
-	PRINTF("Test Copy Data function result: %s",test_result[test_memcopy()]);
-	PRINTF("Test Set Data function result: %s",test_result[test_memset()]);
-	PRINTF("Test Memory Reverse function result: %s",test_result[test_reverse()]);
+	/*const char *test_result[2] = {"FAIL", "PASS"};
+	PRINTF("\nTest Data 1 function result: %s",test_result[test_data1()]);
+	PRINTF("\nTest Data 2 function result: %s",test_result[test_data2()]);
+	PRINTF("\nTest Move Data 1 function result: %s",test_result[test_memmove1()]);
+	PRINTF("\nTest Move Data 2 function result: %s",test_result[test_memmove2()]);
+	PRINTF("\nTest Move Data 3 function result: %s",test_result[test_memmove3()]);
+	PRINTF("\nTest Copy Data function result: %s",test_result[test_memcopy()]);
+	PRINTF("\nTest Set Data function result: %s",test_result[test_memset()]);
+	PRINTF("\nTest Memory Reverse function result: %s\n",test_result[test_reverse()]);*/
 	/*
 	test_data2();
 	test_memmove1();
@@ -61,6 +83,7 @@ int8_t course1(){
 	test_memset();
 	test_reverse();
 	*/
+	test_memmove2();
 	return 0;
 }
 
@@ -72,7 +95,7 @@ int8_t test_data1(){
 	uint8_t base;
 	base = 2;
 	length = my_itoa(ItoA_number, local_ptr, base);
-	AtoI_number = my_atoi(local_ptr, length, base)
+	AtoI_number = my_atoi(local_ptr, length, base);
 	#ifdef VERBOSE 
 		PRINTF("\n////////########## test_data1 #########//////////// ");		
 		PRINTF("\n Test 5 Data is: %d  Base is : %d \n Converted Back: %d", ItoA_number,base,AtoI_number);
@@ -97,7 +120,7 @@ int8_t test_data2(){
 	uint8_t base;
 	base = 8;
 	length = my_itoa(ItoA_number, local_ptr, base);
-	AtoI_number = my_atoi(local_ptr, length, base)
+	AtoI_number = my_atoi(local_ptr, length, base);
 	#ifdef VERBOSE 
 		PRINTF("\n////////########## test_data2 #########//////////// ");		
 		PRINTF("\n Test 5 Data is: %d  Base is : %d \n Converted Back: %d", ItoA_number,base,AtoI_number);
@@ -114,7 +137,7 @@ int8_t test_data2(){
 }
 /****************************************************************/
 int8_t test_memmove1(){
-	
+	uint8_t * source = data_set1;
 	uint8_t * destination = source + NO_OVER_LAP;
 	int8_t result;
 	destination = my_memmove(source,destination,TEST_ARRAY_SIZE);
@@ -131,33 +154,38 @@ int8_t test_memmove1(){
 }
 /****************************************************************/
 int8_t test_memmove2(){
-	uint8_t *source = data_set1;	
+	uint8_t * source = data_set1;	
 	uint8_t * destination = source - OVERLAP1; // Destination start is before sourse start by 5 memory locations	
 	int8_t result;
-	my_memmove(source,destination,TEST_ARRAY_SIZE);	
-	result = my_compare(source,destination,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
 		PRINTF("\n Test Movement 2 overlap End of Dest Before Start of Source ");
 		PRINTF("\n Before Movement @ Location %#08X\n ",(unsigned int)((long int)source%10000));
 		print_array_uint8(source,TEST_ARRAY_SIZE);
+	#endif
+	destination = my_memmove(source,destination,TEST_ARRAY_SIZE);	
+	#ifdef VERBOSE
 		PRINTF("\n After Movement @ location %#08X\n ",(unsigned int)((long int)destination%10000));
 		print_array_uint8(destination,TEST_ARRAY_SIZE);
 		PRINTF("\n ************************************************************************\n ");	
 	#endif
+	result = my_compare(source,destination,TEST_ARRAY_SIZE);
 	my_memmove(destination,data_set1,TEST_ARRAY_SIZE); // Return the data to its place!
-	return result;;
+	return result;
 }
 /****************************************************************/
 int8_t test_memmove3(){
 	uint8_t *source = data_set1;
 	uint8_t *destination = source + OVERLAP2;  // Destination start is after sourse start by 5 memory locations
 	int8_t result;
-	destination = my_memmove(data_set1,destination,TEST_ARRAY_SIZE);
-	result = my_compare(source,destination,TEST_ARRAY_SIZE);
+
 	#ifdef VERBOSE
 		PRINTF("\n Test Movement 3 overlap Start of Dest before End of source ");
 		PRINTF("\n Before Movement @ Location %#08X\n ",(unsigned int)((long int)source%10000));
 		print_array_uint8(source,TEST_ARRAY_SIZE);
+	#endif
+	destination = my_memmove(data_set1,destination,TEST_ARRAY_SIZE);
+	result = my_compare(source,destination,TEST_ARRAY_SIZE);	
+	#ifdef VERBOSE
 		PRINTF("\n After Movement @ location %#08X\n ",(unsigned int)((long int)destination%10000));
 		print_array_uint8(destination,TEST_ARRAY_SIZE);	
 		PRINTF("\n ************************************************************************\n ");
@@ -229,12 +257,14 @@ int8_t test_reverse(){
 	return result;
 }
 static int8_t my_compare(uint8_t* source1,uint8_t* source2, uint8_t length){
+	uint8_t * src1_temp = source1;
+	uint8_t * src2_temp = source2;
 	for(int i =1;i<length;i++){
-		if(*source1 != source2){
+		if(*src1_temp != *src2_temp){
 			return FALSE;
 		}
-		source1++;
-		source2++;
+		src1_temp++;
+		src2_temp++;
 	}
 	return TRUE;
 }
