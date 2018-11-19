@@ -25,14 +25,10 @@
 #include "data.h"
 #include "stats.h"
 #include "platform.h"
-#define OVERLAP1 7
-#define OVERLAP2 11
-#define TEST_ARRAY_SIZE 20
-#define NO_OVER_LAP 25
-#define SET_VALUE 7
-#define TRUE 1
-#define FALSE 0
-/*
+
+
+
+/* 	LOCAL FUNCTION
  * @brief Test Data between two memory location if equal return TRUE, Else return false
  *
  * 
@@ -50,7 +46,19 @@ static int8_t my_compare(uint8_t* source1,uint8_t* source2, uint8_t length);
  * @return TRUE/FALSE
  */
 static int8_t my_compare_set(uint8_t* source1,uint8_t value, uint8_t length);
-
+/***********************************************************
+ Define const
+***********************************************************/
+#define OVERLAP1 7
+#define OVERLAP2 11
+#define TEST_ARRAY_SIZE 20
+#define NO_OVER_LAP 25
+#define SET_VALUE 7
+#define TRUE 1
+#define FALSE 0
+/***********************************************************
+ Global variables
+***********************************************************/
 uint8_t data_set1[TEST_ARRAY_SIZE+20]= {1 , 2 , 3 , 4 , 5 ,
 					6 , 7 , 8 , 9 , 10,
 					11, 12, 13, 14, 15,
@@ -59,12 +67,11 @@ uint8_t data_set2[TEST_ARRAY_SIZE] =   {1 , 2 , 3 , 4 , 5 ,
 					6 , 7 , 8 , 9 , 10,
 					11, 12, 13, 14, 15,
 					16, 17, 18, 19, 20};
-
+const char *test_result[2] = {"FAIL", "PASS"};
 /***********************************************************
  Function Definitions
 ***********************************************************/
-int8_t course1(){
-	const char *test_result[2] = {"FAIL", "PASS"};
+int8_t course1(){	
 	PRINTF("\nTest Data 1 function result: %s\n\n",test_result[test_data1()]);
 	PRINTF("\nTest Data 2 function result: %s\n\n",test_result[test_data2()]);
 	PRINTF("\nTest Move Data 1 function result: %s\n\n",test_result[test_memmove1()]);
