@@ -44,7 +44,15 @@ uint8_t data_set2[TEST_ARRAY_SIZE] =   {1 , 2 , 3 , 4 , 5 ,
 ***********************************************************/
 int8_t course1(){
 	const char *test_result[2] = {"FAIL", "PASS"};
-	test_data1();
+	PRINTF("Test Data 1 function result: %s",test_result[test_data1()]);
+	PRINTF("Test Data 2 function result: %s",test_result[test_data2()]);
+	PRINTF("Test Move Data 1 function result: %s",test_result[test_memmove1()]);
+	PRINTF("Test Move Data 2 function result: %s",test_result[test_memmove2()]);
+	PRINTF("Test Move Data 3 function result: %s",test_result[test_memmove3()]);
+	PRINTF("Test Copy Data function result: %s",test_result[test_memcopy()]);
+	PRINTF("Test Set Data function result: %s",test_result[test_memset()]);
+	PRINTF("Test Memory Reverse function result: %s",test_result[test_reverse()]);
+	/*
 	test_data2();
 	test_memmove1();
 	test_memmove2();
@@ -52,7 +60,7 @@ int8_t course1(){
 	test_memcopy();
 	test_memset();
 	test_reverse();
-	
+	*/
 	return 0;
 }
 
@@ -204,22 +212,21 @@ int8_t test_memset(){
 /****************************************************************/
 int8_t test_reverse(){
 	uint8_t *my_memory = (uint8_t*) malloc(TEST_ARRAY_SIZE*sizeof(int8_t));
+	uint8_t result; 
 	my_memory = my_memmove(data_set2,my_memory,TEST_ARRAY_SIZE);
+	my_memory = my_reverse(my_memory,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
 		PRINTF("\n Test of Memory Reverse ");
 		PRINTF("\n Before Reverse @ Location %#08X\n ",(unsigned int)((long int)my_memory%10000));
-	#endif	
-	print_array_uint8(my_memory,TEST_ARRAY_SIZE);
-	my_memory = my_reverse(my_memory,TEST_ARRAY_SIZE);
-	#ifdef VERBOSE
+		print_array_uint8(my_memory,TEST_ARRAY_SIZE);
 		PRINTF("\n After Reverse @ Location %#08X\n ",(unsigned int)((long int)my_memory%10000));
-	#endif
-	print_array_uint8(my_memory,TEST_ARRAY_SIZE);
-	free((void*)my_memory);
-	#ifdef VERBOSE
+		print_array_uint8(my_memory,TEST_ARRAY_SIZE);
 		PRINTF("\n ************************************************************************\n ");
 	#endif
-	return 0;
+	my_memory = my_reverse(my_memory,TEST_ARRAY_SIZE); // Reverse Again to compare with the original one
+	result = my_compare(my_memory,data_set2,TEST_ARRAY_SIZE);
+	free((void*)my_memory);
+	return result;
 }
 static int8_t my_compare(uint8_t* source1,uint8_t* source2, uint8_t length){
 	for(int i =1;i<length;i++){
