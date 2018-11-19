@@ -55,64 +55,53 @@ int8_t course1(){
 }
 
 int8_t test_data1(){
-	uint8_t * local_ptr = (uint8_t*) malloc(34*sizeof(int8_t));
-	uint8_t length;
-	length = my_itoa(10000, local_ptr, 10);
 	#ifdef VERBOSE
+		uint8_t * local_ptr = (uint8_t*) malloc(34*sizeof(int8_t));		
+		uint8_t length;
+		length = my_itoa(10000, local_ptr, 10);
 		PRINTF("\n////////########## test_data1 #########//////////// ");		
 		PRINTF("\n Test 1 Data Decimal is: %d", my_atoi(local_ptr, length, 10));
 		print_array_uint8(local_ptr,length);
 		PRINTF("\n------------------------------------------------------------");
-	#endif
-	length = my_itoa(-10000, local_ptr, 10);
-	#ifdef VERBOSE
+		length = my_itoa(-10000, local_ptr, 10);
 		PRINTF("\n Test 2 Data Decimal is: %d", my_atoi(local_ptr, length, 10));
 		print_array_uint8(local_ptr,length);
 		PRINTF("\n------------------------------------------------------------");
-	#endif
-	length = my_itoa(-10000, local_ptr, 2);	
-	#ifdef VERBOSE
+		length = my_itoa(-10000, local_ptr, 2);	
 		PRINTF("\n Test 3 Data Binary is: %d", my_atoi(local_ptr, length, 2));
 		print_array_uint8(local_ptr,length);
 		PRINTF("\n------------------------------------------------------------");
-	#endif
-	length = my_itoa(-10000, local_ptr, 16);
-	#ifdef VERBOSE
+		length = my_itoa(-10000, local_ptr, 16);
 		PRINTF("\n Test 4 Data Hex is: %d", my_atoi(local_ptr, length, 16));
 		print_array_uint8(local_ptr,length);
 		PRINTF("\n------------------------------------------------------------");
-	#endif
-	free((void*)local_ptr);
-	#ifdef VERBOSE
+		free((void*)local_ptr);
 		PRINTF("\n ************************************************************************\n ");
 	#endif
 	return 0;
 }
 /****************************************************************/
 int8_t test_data2(){
-	uint8_t * local_ptr = (uint8_t*) malloc(34*sizeof(int8_t));
-	uint8_t length;
-	length = my_itoa(10000, local_ptr, 8);
-	#ifdef VERBOSE
+	 #ifdef VERBOSE 
+		uint8_t * local_ptr = (uint8_t*) malloc(34*sizeof(int8_t));
+		uint8_t length;
+		length = my_itoa(10000, local_ptr, 8);
 		PRINTF("\n////////########## test_data2 #########//////////// ");		
 		PRINTF("\n Test 5 Data Octal is: %d", my_atoi(local_ptr, length, 8));
 		print_array_uint8(local_ptr,length);
 		PRINTF("\n------------------------------------------------------------");
-	#endif
-	length = my_itoa(-10000, local_ptr, 3);
-	#ifdef VERBOSE
+	        length = my_itoa(-10000, local_ptr, 3);
 		PRINTF("\n Test 6 Data Tertiary is: %d", my_atoi(local_ptr, length, 3));
 		print_array_uint8(local_ptr,length);
 		PRINTF("\n------------------------------------------------------------");
-	#endif
-	length = my_itoa(-10000, local_ptr, 4);	
-	#ifdef VERBOSE
+		length = my_itoa(-10000, local_ptr, 4);	
 		PRINTF("\n Test 7 Data Quad is: %d", my_atoi(local_ptr, length, 4));
 		print_array_uint8(local_ptr,length);
 		PRINTF("\n------------------------------------------------------------");
 		PRINTF("\n ************************************************************************\n ");
+		free((void*)local_ptr);
 	#endif	
-	free((void*)local_ptr);
+	
 	return 0;
 }
 /****************************************************************/

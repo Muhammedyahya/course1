@@ -16,20 +16,23 @@
 #------------------------------------------------------------------------------
 # This is a make build file to generate different files (assembly,objects,EXE) 
 # for different PLATFORM.
-# (Commented out-Not implemented) Default PLATFORM will be the HOST machine it self
+# Two PLATFORM are supported the HOST machine it self and the
 # Second option PLATFORM is the MSP432 platform
 # Use: make [TARGET] [PLATFORM-OVERRIDES]
-#
+# Have Debugging option to print data on screen by passing VERBOSE option through DEBUG flag
+# Pass course no to call the correct function.
 # Build Targets:
 #      <FILE>.o - Builds <FILE>.o object file
 #      <FILE>.d - Builds <FILE>.d dependancy file
 #      <FILE>.i - Builds <FILE>.i preprocessed file
 #      <FILE>.asm - Builds <FILE>.asm assembly file
 #      <FILE>.dump - Builds <FILE>.dump assembly file using the GNU BIN utilities
-#      c1m2.out - output file and size for every output file using GNU Bin utility
+#      course1.out - output file and size for every output file using GNU Bin utility
 #      build - Builds and links all source files
 #      compile-all - build all files without linking
 #      clean - removes all generated files
+#      run - run the target output file 
+#      rebuild - clean the output files and build it again and run the target
 # Platform Overrides:
 #      PLATFORM -  The platform for the output file to executre (HOST, MSP432)
 #
@@ -41,7 +44,7 @@ LINKER_FILE =  -T msp432p401r.lds
 CPU = cortex-m4
 ARCH = armv7e-m
 SPECS = nosys.specs
-
+ARCH_FLAGS = -mcpu=$(CPU) -march=$(ARCH) -mfloat-abi=hard -mfpu=fpv4-sp-d16 --specs=$(SPECS) -mthumb
 # Compiler Flags and Defines
 LD = arm-none-eabi-ld
 TARGET  = course1
@@ -50,13 +53,12 @@ LDFLAGS = -Wl,-Map=$(TARGET).map -O0
 CFLAGS  := -Wall \
 	  -Werror \
 	  -Wextra \
-	  -g \
 	  -std=c99
 CPPFLAGs = -E
 ASFLAGS  = -S
 # Debug flag
 ifeq ($(DEBUG),VERBOSE)
-  CFLAGS += -D$(DEBUG)
+  CFLAGS += -D$(DEBUG) -g
 endif
 # Include course1 function
 ifeq ($(COURSE),COURSE1)
@@ -72,7 +74,7 @@ ifeq ($(PLATFORM),HOST)
 else ifeq ($(PLATFORM),MSP432)
 	CC = arm-none-eabi-gcc
 	LDFLAGS +=-Xlinker $(LINKER_FILE)
-	CFLAGS +=-mcpu=$(CPU) -march=$(ARCH) -mfloat-abi=hard -mfpu=fpv4-sp-d16 --specs=$(SPECS) -mthumb
+	CFLAGS += $(ARCH_FLAGS)
 	AS = arm-none-eabi-objdump
 	SIZEUTIL = arm-none-eabi-size
 endif

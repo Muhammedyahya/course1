@@ -104,19 +104,25 @@ void sort_array(unsigned char* array, unsigned int temp_length){
 	}
 }
 void print_array(unsigned char* array, unsigned int temp_length){
-	#ifdef VERBOSE  // Print Only if Debugging is enabled!
 		if(check_validity(array,temp_length)){
 			unsigned int length=(unsigned int)temp_length;
-			PRINTF("\n");
+			#ifdef VERBOSE  // Print Only if Debugging is enabled!
+				PRINTF("\n");
+			#endif 
 			for(unsigned int i=0;i<length;i++){
 				if((i%5)==0){
-					PRINTF("\n");
+					#ifdef VERBOSE  // Print Only if Debugging is enabled!
+						PRINTF("\n");
+					#endif 
 				}
-				PRINTF("	%d",array[i]);
+				#ifdef VERBOSE  // Print Only if Debugging is enabled!
+					PRINTF("	%d",array[i]);
+				#endif
 			}
-			PRINTF("\n");
+			#ifdef VERBOSE  // Print Only if Debugging is enabled!
+				PRINTF("\n");
+			#endif 
 		}
-	#endif
 }
 /****************************************************************/
 //*** Function override to print uint8 variable types ****// 
