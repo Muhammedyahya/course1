@@ -117,9 +117,27 @@ int8_t test_memset();
  *
  * This function will call memreverse function and diplay the results
  * 
- * @parm nothing to pass
+ * @param nothing to pass
  * @return 
  */
 int8_t test_reverse();
+/*
+ * @brief Test Data between two memory location if equal return TRUE, Else return false
+ *
+ * 
+ * @param source1 pointer to first memory location
+ * @param source2 pointer to second memory location
+ * @return TRUE/FALSE
+ */
+int8_t my_compare(uint8_t* source1,uint8_t* source2, uint8_t length);
+/*
+ * @brief Test Data between a memory location and value if equal return TRUE, Else return false
+ *
+ * 
+ * @param source1 pointer to first memory location
+ * @param value to compare with
+ * @return TRUE/FALSE
+ */
+int8_t my_compare_set(uint8_t* source1,uint8_t value, uint8_t length);
 
 #endif /*__COURSE1_H__*/
