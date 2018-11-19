@@ -65,7 +65,7 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length){
 	size_t i=1;
 	uint8_t * temp_dst = dst; // To return dst address 
 	uint8_t * temp_src = src; // Data manipulation in temporary pointer
-	if((temp_dst - temp_src)<length){ 
+	if((temp_dst - temp_src)<((signed int)length)){ 
 		for(uint8_t i=1;i < length;i++){
 			// Pointing to the Bottom, 
 			temp_dst++; // This guarantee the increment will be based on size of pointer 

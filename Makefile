@@ -45,11 +45,12 @@ SPECS = nosys.specs
 # Compiler Flags and Defines
 LD = arm-none-eabi-ld
 TARGET  = course1
-LDFLAGS = -Wl,-Map=$(TARGET).map # -O0
+LDFLAGS = -Wl,-Map=$(TARGET).map -O0
 	  
-CFLAGS  := -Wall  \
+CFLAGS  := -Wall \
 	  -Werror \
-	  -g      \
+	  -Wextra \
+	  -g \
 	  -std=c99
 CPPFLAGs = -E
 ASFLAGS  = -S
