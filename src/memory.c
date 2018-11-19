@@ -133,7 +133,7 @@ uint8_t * my_reverse(uint8_t * src, size_t length){
 		// Poiting to the Bottom, 
 		temp_src++; // This guarantee the increment will be based on size of pointer 
 	}
-	for(i=1;i < (length/2);i++){
+	for(i=1;i <= (length/2);i++){
 		swap_uint8(src, temp_src);
 		src++;
 		temp_src--;
