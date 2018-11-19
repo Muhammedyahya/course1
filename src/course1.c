@@ -29,7 +29,7 @@
 #define OVERLAP2 11
 #define TEST_ARRAY_SIZE 20
 
-uint8_t data_set1[TEST_ARRAY_SIZE] =   {1 , 2 , 3 , 4 , 5 ,
+uint8_t data_set1[TEST_ARRAY_SIZE+20]= {1 , 2 , 3 , 4 , 5 ,
 					6 , 7 , 8 , 9 , 10,
 					11, 12, 13, 14, 15,
 					16, 17, 18, 19, 20};
@@ -42,50 +42,77 @@ uint8_t data_set2[TEST_ARRAY_SIZE] =   {1 , 2 , 3 , 4 , 5 ,
  Function Definitions
 ***********************************************************/
 int8_t course1(){
-	//test_data1();
-	//test_data2();
+	test_data1();
+	test_data2();
 	test_memmove1();
 	test_memmove2();
 	test_memmove3();
 	test_memcopy();
 	test_memset();
 	test_reverse();
+	
 	return 0;
 }
 
 int8_t test_data1(){
 	uint8_t * local_ptr = (uint8_t*) malloc(34*sizeof(int8_t));
 	uint8_t length;
-	
-	length = my_itoa(12345, local_ptr, 10);
-	print_array_uint8(local_ptr,length);
-	
+	length = my_itoa(10000, local_ptr, 10);
 	#ifdef VERBOSE
-		PRINTF("\n Test Data is: %d", my_atoi(local_ptr, length, 10));
+		PRINTF("\n////////########## test_data1 #########//////////// ");		
+		PRINTF("\n Test 1 Data Decimal is: %d", my_atoi(local_ptr, length, 10));
+		print_array_uint8(local_ptr,length);
+		PRINTF("\n------------------------------------------------------------");
 	#endif
-	length = my_itoa(-12345, local_ptr, 10);
-	print_array_uint8(local_ptr,length);
-	
+	length = my_itoa(-10000, local_ptr, 10);
 	#ifdef VERBOSE
-		PRINTF("\n Test Data is: %d", my_atoi(local_ptr, length, 10));
+		PRINTF("\n Test 2 Data Decimal is: %d", my_atoi(local_ptr, length, 10));
+		print_array_uint8(local_ptr,length);
+		PRINTF("\n------------------------------------------------------------");
 	#endif
-	length = my_itoa(-123, local_ptr, 2);
-	print_array_uint8(local_ptr,length);
-	
+	length = my_itoa(-10000, local_ptr, 2);	
 	#ifdef VERBOSE
-		PRINTF("\n Test Data is: %d", my_atoi(local_ptr, length, 10));
+		PRINTF("\n Test 3 Data Binary is: %d", my_atoi(local_ptr, length, 2));
+		print_array_uint8(local_ptr,length);
+		PRINTF("\n------------------------------------------------------------");
 	#endif
-	length = my_itoa(-1234567, local_ptr, 16);
-	print_array_uint8(local_ptr,length);
-	
+	length = my_itoa(-10000, local_ptr, 16);
 	#ifdef VERBOSE
-		PRINTF("\n Test Data is: %d", my_atoi(local_ptr, length, 10));
+		PRINTF("\n Test 4 Data Hex is: %d", my_atoi(local_ptr, length, 16));
+		print_array_uint8(local_ptr,length);
+		PRINTF("\n------------------------------------------------------------");
 	#endif
 	free((void*)local_ptr);
+	#ifdef VERBOSE
+		PRINTF("\n ************************************************************************\n ");
+	#endif
 	return 0;
 }
 /****************************************************************/
 int8_t test_data2(){
+	uint8_t * local_ptr = (uint8_t*) malloc(34*sizeof(int8_t));
+	uint8_t length;
+	length = my_itoa(10000, local_ptr, 8);
+	#ifdef VERBOSE
+		PRINTF("\n////////########## test_data2 #########//////////// ");		
+		PRINTF("\n Test 5 Data Octal is: %d", my_atoi(local_ptr, length, 8));
+		print_array_uint8(local_ptr,length);
+		PRINTF("\n------------------------------------------------------------");
+	#endif
+	length = my_itoa(-10000, local_ptr, 3);
+	#ifdef VERBOSE
+		PRINTF("\n Test 6 Data Tertiary is: %d", my_atoi(local_ptr, length, 3));
+		print_array_uint8(local_ptr,length);
+		PRINTF("\n------------------------------------------------------------");
+	#endif
+	length = my_itoa(-10000, local_ptr, 4);	
+	#ifdef VERBOSE
+		PRINTF("\n Test 7 Data Quad is: %d", my_atoi(local_ptr, length, 4));
+		print_array_uint8(local_ptr,length);
+		PRINTF("\n------------------------------------------------------------");
+		PRINTF("\n ************************************************************************\n ");
+	#endif	
+	free((void*)local_ptr);
 	return 0;
 }
 /****************************************************************/
@@ -94,15 +121,13 @@ int8_t test_memmove1(){
 	uint8_t * destination = data_set1 + 25;
 	#ifdef VERBOSE
 		PRINTF("\n Test Movement 1 No overlap ");
-		PRINTF("\n Before Movement @ Location %#08X\n ",(unsigned int)((long int)data_set1%1000));
+		PRINTF("\n Before Movement @ Location %#08X\n ",(unsigned int)((long int)data_set1%10000));
+		print_array_uint8(data_set1,TEST_ARRAY_SIZE);
 	#endif
-	print_array_uint8(data_set1,TEST_ARRAY_SIZE);
 	destination = my_memmove(data_set1,destination,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
-		PRINTF("\n After Movement @ location %#08X\n ",(unsigned int)((long int)destination%1000));
-	#endif
-	print_array_uint8(destination,TEST_ARRAY_SIZE);
-	#ifdef VERBOSE
+		PRINTF("\n After Movement @ location %#08X\n ",(unsigned int)((long int)destination%10000));
+		print_array_uint8(destination,TEST_ARRAY_SIZE);
 		PRINTF("\n ************************************************************************\n ");
 	#endif
 	return 0;
@@ -113,18 +138,16 @@ int8_t test_memmove2(){
 	uint8_t * destination = source - OVERLAP1; // Destination start is before sourse start by 5 memory locations	
 	#ifdef VERBOSE
 		PRINTF("\n Test Movement 2 overlap End of Dest Before Start of Source ");
-		PRINTF("\n Before Movement @ Location %#08X\n ",(unsigned int)((long int)data_set1%1000));
+		PRINTF("\n Before Movement @ Location %#08X\n ",(unsigned int)((long int)data_set1%10000));
+		print_array_uint8(data_set1,TEST_ARRAY_SIZE);
 	#endif
-	print_array_uint8(data_set1,TEST_ARRAY_SIZE);
 	my_memmove(source,destination,TEST_ARRAY_SIZE);	
 	#ifdef VERBOSE
-		PRINTF("\n After Movement @ location %#08X\n ",(unsigned int)((long int)destination%1000));
+		PRINTF("\n After Movement @ location %#08X\n ",(unsigned int)((long int)destination%10000));
+		print_array_uint8(destination,TEST_ARRAY_SIZE);
+		PRINTF("\n ************************************************************************\n ");	
 	#endif
-	print_array_uint8(destination,TEST_ARRAY_SIZE);
 	my_memmove(destination,data_set1,TEST_ARRAY_SIZE); // Return the data to its place!
-	#ifdef VERBOSE
-		PRINTF("\n ************************************************************************\n ");
-	#endif	
 	return 0;
 }
 /****************************************************************/
@@ -134,12 +157,12 @@ int8_t test_memmove3(){
 	
 	#ifdef VERBOSE
 		PRINTF("\n Test Movement 3 overlap Start of Dest before End of source ");
-		PRINTF("\n Before Movement @ Location %#08X\n ",(unsigned int)((long int)data_set1%1000));
+		PRINTF("\n Before Movement @ Location %#08X\n ",(unsigned int)((long int)data_set1%10000));
 	#endif	
 	print_array_uint8(source,TEST_ARRAY_SIZE);
 	destination = my_memmove(data_set1,destination,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
-		PRINTF("\n After Movement @ location %#08X\n ",(unsigned int)((long int)destination%1000));
+		PRINTF("\n After Movement @ location %#08X\n ",(unsigned int)((long int)destination%10000));
 	#endif
 	print_array_uint8(destination,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
@@ -155,12 +178,12 @@ int8_t test_memcopy(){
 	uint8_t *destination = source + 25;  
 	#ifdef VERBOSE
 		PRINTF("\n Test Copy No-Overlap ");
-		PRINTF("\n Before Copy @ Location %#08X\n ",(unsigned int)((long int)data_set1%1000));
+		PRINTF("\n Before Copy @ Location %#08X\n ",(unsigned int)((long int)source%10000));
 	#endif
 	destination = my_memcopy(source,destination,TEST_ARRAY_SIZE);	
 	print_array_uint8(source,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
-		PRINTF("\n After Copy @ location %#08X\n ",(unsigned int)((long int)destination%1000));
+		PRINTF("\n After Copy @ location %#08X\n ",(unsigned int)((long int)destination%10000));
 	#endif
 	print_array_uint8(destination,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
@@ -169,12 +192,12 @@ int8_t test_memcopy(){
 	destination = source + 5;
 	#ifdef VERBOSE
 		PRINTF("\n Test Copy with Overlap ");
-		PRINTF("\n Before Copy @ Location %#08X\n ",(unsigned int)((long int)data_set1%1000));
+		PRINTF("\n Before Copy @ Location %#08X\n ",(unsigned int)((long int)source%10000));
 	#endif
+	print_array_uint8(source,TEST_ARRAY_SIZE);	
 	destination = my_memcopy(source,destination,TEST_ARRAY_SIZE);	
-	print_array_uint8(source,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
-		PRINTF("\n After Copy @ location %#08X\n ",(unsigned int)((long int)destination%1000));
+		PRINTF("\n After Copy @ location %#08X\n ",(unsigned int)((long int)destination%10000));
 	#endif
 	print_array_uint8(destination,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
@@ -187,22 +210,22 @@ int8_t test_memset(){
 	uint8_t *my_memory = (uint8_t*) malloc(10*sizeof(int8_t));
 	#ifdef VERBOSE
 		PRINTF("\n Test of MemSet ");
-		PRINTF("\n Before Set @ Location %#08X\n ",(unsigned int)((long int)my_memory%1000));
+		PRINTF("\n Before Set @ Location %#08X\n ",(unsigned int)((long int)my_memory%10000));
 	#endif
 	print_array_uint8(my_memory,10);
 	my_memory = my_memset(my_memory,10,6);
 	#ifdef VERBOSE
-		PRINTF("\n After Set @ Location %#08X\n ",(unsigned int)((long int)my_memory%1000));
+		PRINTF("\n After Set @ Location %#08X\n ",(unsigned int)((long int)my_memory%10000));
 	#endif
 	print_array_uint8(my_memory,10);
 	#ifdef VERBOSE
 		PRINTF("\n Test of MemZero ");
-		PRINTF("\n Before Set Zero @ Location %#08X\n ",(unsigned int)((long int)my_memory%1000));
+		PRINTF("\n Before Set Zero @ Location %#08X\n ",(unsigned int)((long int)my_memory%10000));
 	#endif
 	print_array_uint8(my_memory,10);
 	my_memory = my_memzero(my_memory,10);
 	#ifdef VERBOSE
-		PRINTF("\n After Set Zero @ Location %#08X\n ",(unsigned int)((long int)my_memory%1000));
+		PRINTF("\n After Set Zero @ Location %#08X\n ",(unsigned int)((long int)my_memory%10000));
 	#endif
 	print_array_uint8(my_memory,10);
 	free((void*)my_memory);
@@ -218,12 +241,12 @@ int8_t test_reverse(){
 	my_memory = my_memmove(data_set2,my_memory,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
 		PRINTF("\n Test of Memory Reverse ");
-		PRINTF("\n Before Reverse @ Location %#08X\n ",(unsigned int)((long int)my_memory%1000));
+		PRINTF("\n Before Reverse @ Location %#08X\n ",(unsigned int)((long int)my_memory%10000));
 	#endif	
 	print_array_uint8(my_memory,TEST_ARRAY_SIZE);
 	my_memory = my_reverse(my_memory,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
-		PRINTF("\n After Reverse @ Location %#08X\n ",(unsigned int)((long int)my_memory%1000));
+		PRINTF("\n After Reverse @ Location %#08X\n ",(unsigned int)((long int)my_memory%10000));
 	#endif
 	print_array_uint8(my_memory,TEST_ARRAY_SIZE);
 	free((void*)my_memory);

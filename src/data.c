@@ -46,10 +46,10 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base){
 		data=data*-1; // Convert the data into positive
 		length++;
 	}
-	while(length<=32) // Dismantle the number into individual digits by dividing by 10;
+	while(length<=32) // Dismantle the number into individual digits by dividing by base;
 	{                 // The most significant digit will be at the last location.
 		
-		*ptr = data%base;  // Store the modulus
+		*ptr = data%base;  // Store the modulus	
 		data = data/base;  // Shift the data to the right
 		if(*ptr>9){
 			ASCII_start = 65; // if the number is 10 and above it should be A, B, ...
@@ -61,7 +61,7 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base){
 		ptr++;            // point to the next location
 		length++;    
 		if((data==0)){    // The number division is completed
-			(*ptr) = *((uint8_t*) NULL); // Terminate by NULL
+			(*ptr) = 0; // Terminate by NULL
 			break; 
 		}
 	}
@@ -72,9 +72,9 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base){
 	}else{
 		ptr = start_address;
 		temp_length = temp_length -1;
-	}
+	}	
 	ptr = my_reverse(ptr, temp_length); // Reverse the order so That the first location 
-					    // Points to the most significant digit (MSD)
+	 				    // Points to the most significant digit (MSD)
 	
 	return length;
 }
@@ -97,16 +97,13 @@ int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base){
 		ptr++;  // point to the next location
 	}
 	
-	while(length<=digits){
+	while((length<digits)&&(*ptr != 0)){
 		data = *ptr - ASCII_start;
 		if(data > 9){ //  base is more than 10 and digit is A, B, ...
 			data -= 17; // To obtain the decimal equivelant of A, B, ...
 		}
-		if((data > 15)||(data < 0)){
+		if((data > 15)||(data < 0)){		
 			break; // Data is not correct the conversion stops here only. 
-		}
-		if(length == 1){
-			integer_number=data; // for the first digit;
 		}
 		integer_number = integer_number*base +data;
 		ptr++; // point to the next location;
