@@ -1,126 +1,131 @@
 /******************************************************************************
- * Copyright (C) 2018 by Ashraf Abdalraheem
+ * Copyright (C) 2017 by Alex Fosdick - University of Colorado
  *
  * Redistribution, modification or use of this software in source or binary
  * forms is permitted as long as the files maintain this copyright. Users are 
  * permitted to modify this and use it to learn about the field of embedded
- * software. Ashraf Abdalraheem are not liable for any
+ * software. Alex Fosdick and the University of Colorado are not liable for any
  * misuse of this material. 
- * This code is designed as a part of assignment belongs to the online course of Introduction to 
- * Embedded Software & Development Environment which is a part of Embedded Software Essential Specialization
- * Provided by University of Colorado Boulder and Coursera By Alex Fosdick
+ *
  *****************************************************************************/
 /**
- * @file course1.h
- * @brief Test memory and data manipulation
+ * @file course1.h 
+ * @brief This file is to be used to course 1 final assessment.
  *
- * This abstraction file provides interface to function declaration to test the data and memory manipulation functions
- *
- * @author Ashraf Abdalraheem
- * @date Nov 16 2018
+ * @author Alex Fosdick
+ * @date April 2, 2017
  *
  */
 #ifndef __COURSE1_H__
 #define __COURSE1_H__
-#include <stdint.h>
-/*
- * @brief Test Data and memory manipulation
- *
- * This function will call a set of functions ment to test other functions that manipulate 
- * the data in memroy using pointers such as memory move and memory copy. Also it will test 
- * the data manipulation function such as ASCII to integer conversion and vice versa.
- * 
- * @parm nothing to pass
- * @return 
- */
-int8_t course1();
 
-/*
- * @brief Test ASCII to integer and integer to ASCII conversion
- *
- * This function will call atoi() and itoa() functions to test the ASCII to integer 
- * and integer to ASCII covertion. 
+#include <stdint.h>
+
+#define DATA_SET_SIZE_W (10)
+#define MEM_SET_SIZE_B  (32)
+#define MEM_SET_SIZE_W  (8)
+#define MEM_ZERO_LENGTH (16)
+
+#define TEST_MEMMOVE_LENGTH (16)
+#define TEST_ERROR          (1)
+#define TEST_NO_ERROR       (0)
+#define TESTCOUNT           (8)
+
+/**
+ * @brief function to run course1 materials
  * 
- * @parm nothing to pass
- * @return 
+ * This function calls some various simple tests that you can run to test 
+ * your code for the course 1 final assesment. The contents of these functions
+ * have been provided. 
+ *
+ * @return void
+ */
+void course1(void);
+
+/**
+ * @brief function to run course1 data operations
+ * 
+ * This function calls the my_itoa and my_atoi functions to validate they
+ * work as expected for hexadecimal numbers.
+ *
+ * @return void
  */
 int8_t test_data1();
 
-/*
- * @brief Test ASCII to integer and integer to ASCII conversion
- *
- * This function will call atoi() and itoa() functions to test the ASCII to integer 
- * and integer to ASCII covertion. 
+/**
+ * @brief function to run course1 data operations
  * 
- * @parm nothing to pass
- * @return 
+ * This function calls the my_itoa and my_atoi functions to validate they
+ * work as expected for decimal numbers. 
+ *
+ * @return void
  */
 int8_t test_data2();
 
-/*
- * @brief Test Memory move function
- *
- * This function will call memory move function with non-overlapped memory locations and test the 
- * result of the movement.
+/**
+ * @brief function to test the non-overlapped memmove operation
  * 
- * @parm nothing to pass
- * @return 
+ * This function calls the memmove routine with two sets of data that do not
+ * over lap in anyway. This function should print that a move worked correctly
+ * for a move from source to destination.
+ *
+ * @return void
  */
 int8_t test_memmove1();
 
-/*
- * @brief Test Memory move function
- *
- * This function will call memory move function with overlapped memory locations and test the 
- * result of the movement.
- * The overlap occur in the end of the destination and the start of the source.
+/**
+ * @brief function to test an overlapped Memmove operation Part 1
  * 
- * @parm nothing to pass
- * @return 
+ * This function calls the memmove routine with two sets of data that not
+ * over lap. Overlap exists at the start of the destination and the end of the
+ * source pointers. This function should print that a move worked correctly
+ * for a move from source to destination regardless of overlap.
+ *
+ * @return void
  */
 int8_t test_memmove2();
 
-/*
- * @brief Test Memory move function
- *
- * This function will call memory move function with overlapped memory locations and test the 
- * result of the movement.
- * The overlap occur in the start of the destination and the end of the source.
+/**
+ * @brief function to run course1 memmove overlapped test
  * 
- * @parm nothing to pass
- * @return 
+ * This function calls the memmove routine with two sets of data that not
+ * over lap. Overlap exists at the start of the source and the end of the
+ * destination pointers. This function should print that a move worked correctly
+ * for a move from source to destination regardless of overlap.
+ *
+ * @return void
  */
 int8_t test_memmove3();
 
-/*
- * @brief Test Memory copy function
- *
- * This function will call memory copy function and display the results
+/**
+ * @brief function to test the memcopy functionality
  * 
- * @parm nothing to pass
- * @return 
+ * This function calls the my_memcopy functions to validate a copy works
+ * correctly. 
+ *
+ * @return void
  */
 int8_t test_memcopy();
 
-/*
- * @brief Test Memory memory set and memory zero set functions
- *
- * This function will call memset and memzero functions and diplay the results
+/**
+ * @brief function to test the memset and memzero functionality
  * 
- * @parm nothing to pass
- * @return 
+ * This function calls the memset and memzero functions. This shoudl zero out
+ * the bytes from [] to []. This should set the bytes [] to [] with 0xFF.
+ *
+ * @return void
  */
 int8_t test_memset();
 
-/*
- * @brief Test Memory memory reverse functions
- *
- * This function will call memreverse function and diplay the results
+/**
+ * @brief function to test the reverse functionality
  * 
- * @param nothing to pass
- * @return 
+ * This function calls the my_reverse function to see if a give set of ASCII
+ * characters will properly reverse.
+ *
+ * @return void
  */
 int8_t test_reverse();
 
+#endif /* __COURSE1_H__ */
 
-#endif /*__COURSE1_H__*/

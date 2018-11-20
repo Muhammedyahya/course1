@@ -55,6 +55,7 @@ CFLAGS   = -Wall \
 	  -Werror \
 	  -Wextra \
 	  -std=c99
+
 CPPFLAGs = -E
 ASFLAGS  = -S
 # Debug flag
