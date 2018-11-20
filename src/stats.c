@@ -110,7 +110,7 @@ void print_array(unsigned char* array, unsigned int temp_length){
 				PRINTF("\n");
 			#endif 
 			for(unsigned int i=0;i<length;i++){
-				if((i%5)==0){
+				if((i%8)==0){
 					#ifdef VERBOSE  // Print Only if Debugging is enabled!
 						PRINTF("\n");
 					#endif 
