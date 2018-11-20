@@ -52,6 +52,7 @@ static int8_t my_compare_set(uint8_t* source1,uint8_t value, uint8_t length);
 #define OVERLAP1 7
 #define OVERLAP2 11
 #define TEST_ARRAY_SIZE 20
+#define TEST_ARRAY_SIZE_INT32 5
 #define NO_OVER_LAP 25
 #define SET_VALUE 7
 #define TRUE 1
@@ -93,7 +94,7 @@ int8_t course1(){
 }
 
 int8_t test_data1(){
-	uint8_t * local_ptr = (uint8_t*) malloc(34*sizeof(int8_t));
+	uint8_t * local_ptr = (uint8_t*) reserve_words(10);
 	uint8_t length;
 	int32_t ItoA_number = -3341209;
 	int32_t AtoI_number;
@@ -107,7 +108,7 @@ int8_t test_data1(){
 		PRINTF("\n Test 5 Data is: %d  Base is : %d \n Converted Back: %d", ItoA_number,base,AtoI_number);
 		print_array_uint8(local_ptr,length);
 	#endif	
-	free((void*)local_ptr);
+	free_words((int32_t*)local_ptr);
 	if(AtoI_number != ItoA_number)
 	{
 		return FALSE;
@@ -117,7 +118,7 @@ int8_t test_data1(){
 /****************************************************************/
 int8_t test_data2(){
 	 
-	uint8_t * local_ptr = (uint8_t*) malloc(34*sizeof(int8_t));
+	uint8_t * local_ptr = (uint8_t*) reserve_words(10);
 	uint8_t length;
 	int32_t ItoA_number = 1209;
 	int32_t AtoI_number;
@@ -131,7 +132,7 @@ int8_t test_data2(){
 		PRINTF("\n Test 5 Data is: %d  Base is : %d \n Converted Back: %d", ItoA_number,base,AtoI_number);
 		print_array_uint8(local_ptr,length);
 	#endif	
-	free((void*)local_ptr);
+	free_words((int32_t*)local_ptr);
 	if(AtoI_number != ItoA_number)
 	{
 		return FALSE;
@@ -141,7 +142,7 @@ int8_t test_data2(){
 /****************************************************************/
 int8_t test_memmove1(){
 	uint8_t * source = data_set1;
-	uint8_t * destination = source + NO_OVER_LAP;
+	uint8_t * destination = (uint8_t*) reserve_words(TEST_ARRAY_SIZE_INT32);
 	int8_t result;
 	destination = my_memmove(source,destination,TEST_ARRAY_SIZE);
 	result = my_compare(source,destination,TEST_ARRAY_SIZE);
@@ -153,6 +154,7 @@ int8_t test_memmove1(){
 		PRINTF("\n After Movement @ location %#08X\n ",(unsigned int)((long int)destination%10000));
 		print_array_uint8(destination,TEST_ARRAY_SIZE);
 	#endif
+	free_words((int32_t*)destination);
 	return result;
 }
 /****************************************************************/
@@ -215,7 +217,7 @@ int8_t test_memcopy(){
 }
 /****************************************************************/
 int8_t test_memset(){
-	uint8_t *my_memory = (uint8_t*) malloc(TEST_ARRAY_SIZE*sizeof(int8_t));
+	uint8_t *my_memory = (uint8_t*) reserve_words(TEST_ARRAY_SIZE_INT32);
 	int8_t result;
 	
 	#ifdef VERBOSE
@@ -237,18 +239,18 @@ int8_t test_memset(){
 		print_array_uint8(my_memory,TEST_ARRAY_SIZE);
 	#endif
 	my_memory = my_memzero(my_memory,TEST_ARRAY_SIZE);
-	result = my_compare_set(my_memory,0,TEST_ARRAY_SIZE);
+	result = result * my_compare_set(my_memory,0,TEST_ARRAY_SIZE);  // And with previous result
 	#ifdef VERBOSE
 		PRINTF("\n After Set Zero @ Location %#08X\n ",(unsigned int)((long int)my_memory%10000));
 		print_array_uint8(my_memory,TEST_ARRAY_SIZE);
 	#endif
-	free((void*)my_memory);
+	free_words((int32_t*)my_memory);
 	return result;
 }
 
 /****************************************************************/
 int8_t test_reverse(){
-	uint8_t *my_memory = (uint8_t*) malloc(TEST_ARRAY_SIZE*sizeof(int8_t));
+	uint8_t *my_memory = (uint8_t*) reserve_words(TEST_ARRAY_SIZE_INT32);
 	uint8_t result; 
 	my_memory = my_memmove(data_set2,my_memory,TEST_ARRAY_SIZE);
 	#ifdef VERBOSE
@@ -264,7 +266,7 @@ int8_t test_reverse(){
 	#endif
 	my_memory = my_reverse(my_memory,TEST_ARRAY_SIZE); // Reverse Again to compare with the original one
 	result = my_compare(my_memory,data_set2,TEST_ARRAY_SIZE);
-	free((void*)my_memory);
+	free_words((int32_t*)my_memory);
 	return result;
 }
 static int8_t my_compare(uint8_t* source1,uint8_t* source2, uint8_t length){

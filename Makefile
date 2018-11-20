@@ -33,6 +33,7 @@
 #      clean - removes all generated files
 #      run - run the target output file 
 #      rebuild - clean the output files and build it again and run the target
+#      debug - run gdb for debugging output file
 # Platform Overrides:
 #      PLATFORM -  The platform for the output file to executre (HOST, MSP432)
 #
@@ -50,7 +51,7 @@ LD = arm-none-eabi-ld
 TARGET  = course1
 LDFLAGS = -Wl,-Map=$(TARGET).map -O0
 	  
-CFLAGS  := -Wall \
+CFLAGS   = -Wall \
 	  -Werror \
 	  -Wextra \
 	  -std=c99
@@ -87,7 +88,7 @@ PRES  := $(SOURCES:.c=.i)
 	$(CC) -E $(INCLUDES) -D$(PLATFORM) $(CLFAGS) $< -o $@
 ASMBDUMP := $(OBJS:.o=.asm)
 %.asm : %.o
-	$(AS) --disassemble -S $< > $@
+	$(AS) $(INCLUDES) --disassemble -S $< > $@
 DEP   := $(SOURCES:.c=.d)
 %.d : %.c
 	$(CC) -MM $(INCLUDES) -D$(PLATFORM) $(CLFAGS) $< -o $@ 
@@ -97,18 +98,24 @@ compile-all: $(OBJS)
 
 .PHONY: build 
 build: $(TARGET).out
-$(TARGET).out: $(OBJS) $(DEP)
+$(TARGET).out: $(OBJS) $(DEP) $(ASMBDUMP)
 	$(CC) $(INCLUDES) $(OBJS) $(CFLAGS) -D$(PLATFORM) $(LDFLAGS) -o $@ 
 	$(AS) --disassemble -S $(TARGET).out > $(TARGET).asm 
 	$(SIZEUTIL) -Btd $@ $(OBJS)
+# Run the executable outpout file
 .PHONY: run
 run: 
 	./$(TARGET).out
+# Remove all generated files
 .PHONY: clean
 clean: 
 	rm -f src/*.dep src/*.d src/*.i src/*.o src/*.asm src/*.out *.dep *.d *.i *.o *.asm *.out *.map
-	ls -la
+# Rebuild: clean, build then Run the executable output file
 .PHONY: rebuild
 rebuild: clean build run
+#for debuging executable file
+.PHONY: debug 
+debug:
+	gdb ./$(TARGET).out
 	
 

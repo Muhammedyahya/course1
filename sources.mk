@@ -20,7 +20,7 @@ SOURCES = src/main.c\
 	  src/course1.c\
 	  src/data.c\
 	  src/stats.c
-
+SOURCE_DIRCTORY = src/
 # Add your include paths to this variable
 INCLUDES =    -I include/common
 
