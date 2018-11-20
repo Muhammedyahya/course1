@@ -20,9 +20,10 @@ SOURCES = src/main.c\
 	  src/course1.c\
 	  src/data.c\
 	  src/stats.c
-SOURCE_DIRCTORY = src/
+SRC_DIR = ./src/
 # Add your include paths to this variable
 INCLUDES =    -I include/common
+	      
 
 #Additional sources and include paths for MSP432 Platform
 ifeq ($(PLATFORM),MSP432)
@@ -31,4 +32,5 @@ ifeq ($(PLATFORM),MSP432)
  	     src/system_msp432p401r.c	
   INCLUDES += -I include/CMSIS\
  	      -I include/msp432
+	      
 endif

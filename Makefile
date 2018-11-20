@@ -71,7 +71,7 @@ endif
 ifeq ($(PLATFORM),HOST)
 	CC = gcc
 	AS = x86_64-linux-gnu-objdump
-	SIZEUTIL = x86_64-linux-gnu-size
+	SIZEUTIL = size
 else ifeq ($(PLATFORM),MSP432)
 	CC = arm-none-eabi-gcc
 	LDFLAGS +=-Xlinker $(LINKER_FILE)
@@ -98,7 +98,7 @@ compile-all: $(OBJS)
 
 .PHONY: build 
 build: $(TARGET).out
-$(TARGET).out: $(OBJS) $(DEP) $(ASMBDUMP)
+$(TARGET).out: $(OBJS) $(DEP) 
 	$(CC) $(INCLUDES) $(OBJS) $(CFLAGS) -D$(PLATFORM) $(LDFLAGS) -o $@ 
 	$(AS) --disassemble -S $(TARGET).out > $(TARGET).asm 
 	$(SIZEUTIL) -Btd $@ $(OBJS)
