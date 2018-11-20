@@ -24,6 +24,8 @@
 #ifndef __STATS_H__
 #define __STATS_H__
 #include <stdint.h>
+
+#define NO_OF_COLUMN      (8)
 /* Add Your Declarations and Function Comments here */ 
 
 /**

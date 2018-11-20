@@ -110,9 +110,9 @@ void print_array(unsigned char* array, unsigned int temp_length){
 				PRINTF("\n");
 			#endif 
 			for(unsigned int i=0;i<length;i++){
-				if((i%8)==0){
+				if((i%NO_OF_COLUMN)==0){ // No of columns
 					#ifdef VERBOSE  // Print Only if Debugging is enabled!
-						PRINTF("\n");
+						PRINTF("\n"); // Go to next line
 					#endif 
 				}
 				#ifdef VERBOSE  // Print Only if Debugging is enabled!
