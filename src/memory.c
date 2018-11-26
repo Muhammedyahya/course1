@@ -62,9 +62,10 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length){
 	 * Check if there is overlapping Then start the move from
 	 * The bottom
 	*/
+	uint8_t i = 0,j=length-1;
 	if(((unsigned int)(dst - src)<(length))&&(dst>src)){ 
-		for(uint8_t i=(length - 1);i >= 0;i--){
-			*(dst + i) = *(src + i);
+		for(i=0,j=length-1;i < length;i++,j--){
+			*(dst + j) = *(src + j);
 		}
 	}else{
 	/*
