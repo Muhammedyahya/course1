@@ -62,32 +62,18 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length){
 	 * Check if there is overlapping Then start the move from
 	 * The bottom
 	*/
-	size_t i=1;
-	uint8_t * temp_dst = dst; // To return dst address 
-	uint8_t * temp_src = src; // Data manipulation in temporary pointer
-	if(((unsigned int)(temp_dst - temp_src)<(length))&&(temp_dst>temp_src)){ 
-		for(uint8_t i=1;i < length;i++){
-			// Pointing to the Bottom, 
-			temp_dst++; // This guarantee the increment will be based on size of pointer 
-			temp_src++;
-		}
-		for(i=1;i <= length;i++){
-			*temp_dst = *temp_src;
-			temp_dst--;
-			temp_src--;
-			
+	if(((unsigned int)(dst - src)<(length))&&(dst>src)){ 
+		for(uint8_t i=(length - 1);i >= 0;i--){
+			*(dst + i) = *(src + i);
 		}
 	}else{
 	/*
 	 * No Overlap Start from the Top
 	 */	
-		for(i=1;i <= length;i++){
-			*(temp_dst) = *(temp_src);
-			temp_dst++;
-			temp_src++;
+		for(i=0;i < length;i++){
+			*(dst + i) = *(src + i);
 		}
 	}
-	src = dst; // Since data has moved the source should equal to destination now!!
 	return dst;
 }
 
@@ -96,12 +82,8 @@ uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length){
 	if((src==NULL)||(dst==NULL)||(length<=0)){
 		return NULL; // Parameters are invalid
 	}
-	uint8_t * temp_dst = dst; // To work in temp pointer not the original
-	uint8_t * temp_src = src; // To work in temp pointer not the original
-	for(uint8_t i=1;i <= length;i++){
-		*(temp_dst) = *(temp_src);
-		temp_dst++;
-		temp_src++;
+	for(uint8_t i=0;i < length;i++){
+		*(dst+i) = *(src+i);
 	}
 	return dst;
 }
@@ -111,12 +93,10 @@ uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value){
 	if((src==NULL)||(length<=0)){
 		return NULL; // Parameters are invalid
 	}
-	uint8_t * temp_src = src; // To return src address 
-	for(uint8_t i=1;i <= length;i++){
-		*(src) = value;
-		src++;
+	for(uint8_t i=0;i < length;i++){
+		*(src + i) = value;
 	}
-	return temp_src;
+	return src;
 	
 }
 
@@ -130,19 +110,10 @@ uint8_t * my_reverse(uint8_t * src, size_t length){
 	if((src==NULL)||(length<=0)){
 		return NULL; // Parameters are invalid
 	}
-	size_t i=1;
-	uint8_t * temp_src = src;
-	uint8_t * temp2_src = src; // To return src address 
-	for(uint8_t i=1;i < length;i++){
-		// Poiting to the Bottom, 
-		temp_src++; // This guarantee the increment will be based on size of pointer 
+	for(uint8_t i=0;i < (length/2);i++){
+		swap_uint8((src + i), (src + (length - 1) - i));
 	}
-	for(i=1;i <= (length/2);i++){
-		swap_uint8(src, temp_src);
-		src++;
-		temp_src--;
-	}
-	return temp2_src;
+	return src;
 }
 int32_t * reserve_words(size_t length){
 	return ((int32_t*)malloc(length*sizeof(int32_t)));
