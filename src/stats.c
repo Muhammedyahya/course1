@@ -52,7 +52,9 @@ char find_mean(unsigned char* array,unsigned int temp_length){
 }
 void swap(unsigned char* variable1,unsigned char* variable2){
 	if((variable1==NULL)||(variable2==NULL)){
-		PRINTF("\n Error:Pointers are not valid!");
+		#if defined (VERBOSE)
+		  PRINTF("\n Error:Pointers are not valid!");
+		#endif
 	}
 	else{
 		char temp=0;
@@ -142,7 +144,9 @@ char find_median(unsigned char* array,unsigned int temp_length){
 		unsigned int length=(unsigned int)temp_length;
 		sort_array(array,length);
 		if((length%2)==0){
-			PRINTF("\n There is two medians %d , %d",array[length/2-1],array[length/2]);
+			#if defined (VERBOSE)
+			  PRINTF("\n There is two medians %d , %d",array[length/2-1],array[length/2]);
+			#endif
 		return (array[length/2-1]+array[length/2])/2;
 		}
 		return array[(length+1)/2]; //bug here!!
@@ -151,23 +155,31 @@ return 0;
 }
 void print_statistics(unsigned char* array,unsigned int length){
 	if(check_validity(array,length)){
-		PRINTF("\n******************* The Statistics *************** \n The mean is : %d",find_mean(array,length));
-		PRINTF("\n The max is : %ld",find_maximum(array,length));
-		PRINTF("\n The Mini is: %ld",find_minimum(array,length));
-		PRINTF("\n The median is: %d\n",find_median(array,length));
+		#if defined (VERBOSE)
+		  PRINTF("\n******************* The Statistics *************** \n The mean is : %d",find_mean(array,length));
+		  PRINTF("\n The max is : %ld",find_maximum(array,length));
+		  PRINTF("\n The Mini is: %ld",find_minimum(array,length));
+		  PRINTF("\n The median is: %d\n",find_median(array,length));
+		#endif
 	}
 }	
 int check_validity(unsigned char* array , unsigned int length){
 	if(array == NULL){
-		PRINTF("\n The pointer is not pointing to anything");
+		#if defined (VERBOSE)
+		  PRINTF("\n The pointer is not pointing to anything");
+		#endif
 		return 0; // The pointer is not pointing to anything 
 	}
 	if(length <1){
-		PRINTF("\n Length is negative, ERROR");
+		#if defined (VERBOSE)
+		  PRINTF("\n Length is negative, ERROR");
+		#endif
 		return 0; 
 	}
 	if(length > SIZE){
-		PRINTF("\n Length is very large, ERROR");
+		#if defined (VERBOSE)
+		  PRINTF("\n Length is very large, ERROR");
+		#endif
 		return 0; 
 	}
 	return 1;
