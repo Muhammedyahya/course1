@@ -29,7 +29,9 @@
 
 #include "stats.h"
 #include <stdlib.h>
-#include "platform.h"
+#if defined (VERBOSE)
+  #include "platform.h"
+#endif
 /* Size of the Data Set */
 #define SIZE (40)
 /* Add other Implementation File Code Here */
