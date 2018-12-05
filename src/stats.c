@@ -29,6 +29,7 @@
 
 #include "stats.h"
 #include <stdlib.h>
+#include "stdint.h"
 #if defined (VERBOSE)
   #include "platform.h"
 #endif
@@ -40,7 +41,8 @@ char find_mean(unsigned char* array,unsigned int temp_length){
 	if(check_validity(array,temp_length)){
 		unsigned int length= (unsigned int) temp_length;
 		long long int sum=0;
-		for(unsigned int i=0;i<length;){
+		uint8_t i;
+		for(i=0;i<length;){
 			sum+=(long int)array[i];
 			++i;
 		}
@@ -95,9 +97,10 @@ long int find_maximum(unsigned char* array, unsigned int temp_length){
 void sort_array(unsigned char* array, unsigned int temp_length){
 	if(check_validity(array,temp_length)){
 		unsigned int length=(unsigned int)temp_length;
-		unsigned int i=0;
+		uint8_t i=0;
+		uint8_t j;
 		for(i=0;i<length;i++){
-			for(unsigned int j=0;j<length;j++){
+			for(j=0;j<length;j++){
 				if(array[j]<array[j+1]){
 					swap(array+j,array+j+1);
 				}
@@ -110,8 +113,9 @@ void print_array(unsigned char* array, unsigned int temp_length){
 			unsigned int length=(unsigned int)temp_length;
 			#ifdef VERBOSE  // Print Only if Debugging is enabled!
 				PRINTF("\n");
-			#endif 
-			for(unsigned int i=0;i<length;i++){
+			#endif  
+			uint8_t i;
+			for(i=0;i<length;i++){
 				if((i%NO_OF_COLUMN)==0){ // No of columns
 					#ifdef VERBOSE  // Print Only if Debugging is enabled!
 						PRINTF("\n"); // Go to next line
