@@ -67,9 +67,10 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length){
 	 * The bottom
 	*/
 	uint8_t i;
+	uint8_t j;
 	if(((unsigned int)(dst - src)<(length))&&(dst>src)){ 
-		for(i=(length - 1);i >= 0;i--){
-			*(dst + i) = *(src + i);
+		for(i=0,j=(length - 1);i <length;i++,j--){
+			*(dst + j) = *(src + j);
 		}
 	}else{
 	/*
