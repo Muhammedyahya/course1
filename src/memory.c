@@ -24,8 +24,12 @@
  *
  */
 #include "memory.h"
-#include <stdlib.h>
-#include "platform.h"
+#include "stdlib.h"
+#include "stdint.h"
+/**** Include the correct platform for printf ******/
+#if defined (VERBOSE)
+  #include "platform.h"
+#endif
 /***********************************************************
  Function Definitions
 ***********************************************************/
@@ -62,8 +66,9 @@ uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length){
 	 * Check if there is overlapping Then start the move from
 	 * The bottom
 	*/
+	uint8_t i;
 	if(((unsigned int)(dst - src)<(length))&&(dst>src)){ 
-		for(uint8_t i=(length - 1);i >= 0;i--){
+		for(i=(length - 1);i >= 0;i--){
 			*(dst + i) = *(src + i);
 		}
 	}else{
@@ -82,7 +87,8 @@ uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length){
 	if((src==NULL)||(dst==NULL)||(length<=0)){
 		return NULL; // Parameters are invalid
 	}
-	for(uint8_t i=0;i < length;i++){
+	uint8_t i;
+	for(i=0;i < length;i++){
 		*(dst+i) = *(src+i);
 	}
 	return dst;
@@ -93,7 +99,8 @@ uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value){
 	if((src==NULL)||(length<=0)){
 		return NULL; // Parameters are invalid
 	}
-	for(uint8_t i=0;i < length;i++){
+	uint8_t i;
+	for(i=0;i < length;i++){
 		*(src + i) = value;
 	}
 	return src;
@@ -110,7 +117,8 @@ uint8_t * my_reverse(uint8_t * src, size_t length){
 	if((src==NULL)||(length<=0)){
 		return NULL; // Parameters are invalid
 	}
-	for(uint8_t i=0;i < (length/2);i++){
+	uint8_t i;
+	for(i=0;i < (length/2);i++){
 		swap_uint8((src + i), (src + (length - 1) - i));
 	}
 	return src;
